@@ -1,0 +1,7 @@
+{
+  "name": "apoVjen",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
