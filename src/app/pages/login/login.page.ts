@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginPageForm } from './login.page.form';
+import { Store } from "@ngrx/store";
+import { AppState } from 'src/store/AppState';
+import { hide, show } from 'src/store/loading/loading.actions';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +19,14 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.form = new LoginPageForm(this.formBuilder).createForm();
+  }
+
+  forgotEmailPassword() {
+    // this.store.dispatch(show());
+
+    // setTimeout(() => {
+    //   this.store.dispatch(hide());
+    // }, 3000);
   }
 
   login() {
