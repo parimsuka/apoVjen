@@ -10,6 +10,9 @@ import { Store, StoreModule } from "@ngrx/store";
 import { LoginPage } from './login.page';
 import { AppState } from 'src/store/AppState';
 import { recoverPassword, recoverPasswordFail, recoverPasswordSuccess } from 'src/store/login/login.actions';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { of, throwError } from 'rxjs';
+import { User } from 'src/app/model/user/User';
 
 describe('LoginPage', () => {
   let component: LoginPage;
@@ -18,6 +21,7 @@ describe('LoginPage', () => {
   let page;
   let store: Store<AppState>;
   let toastController: ToastController;
+  let authService: AuthService;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -34,6 +38,7 @@ describe('LoginPage', () => {
     router = TestBed.get(Router);
     store = TestBed.get(Store);
     toastController = TestBed.get(ToastController);
+    authService = TestBed.get(AuthService);
 
     component = fixture.componentInstance;
     page = fixture.debugElement.nativeElement;
@@ -44,15 +49,15 @@ describe('LoginPage', () => {
     component.ngOnInit();
 
     expect(component.form).not.toBeUndefined();
-})
+  })
 
-  it('should go to home page on login', () => {
-    spyOn(router, 'navigate');
+  // it('should go to home page on login', () => {
+  //   spyOn(router, 'navigate');
 
-    component.login();
+  //   component.login();
 
-    expect(router.navigate).toHaveBeenCalledWith(['tabs']);
-  });
+  //   expect(router.navigate).toHaveBeenCalledWith(['tabs']);
+  // });
 
   it('should go to register page on register', () => {
     spyOn(router, 'navigate');
@@ -67,7 +72,7 @@ describe('LoginPage', () => {
 
     component.form.get('email').setValue('valid@email.com');
 
-    page.querySelector("#recoverPasswordButton").click();
+    page.querySelector('#recoverPasswordButton').click();
 
     store.select('login').subscribe(loginState => {
       expect(loginState.isRecoveringPassword).toBeTruthy();
@@ -79,7 +84,7 @@ describe('LoginPage', () => {
 
     store.dispatch(recoverPassword());
 
-    page.querySelector("#recoverPasswordButton").click();
+    page.querySelector('#recoverPasswordButton').click();
 
     store.select('loading').subscribe(loadingState => {
       expect(loadingState.show).toBeTruthy();
@@ -102,7 +107,7 @@ describe('LoginPage', () => {
   });
 
   it('should hide loading and show error message when error on password recovery', () => {
-    spyOn(toastController, 'create');
+    spyOn(toastController, 'create').and.returnValue(<any> Promise.resolve({present: () => {}}));
     fixture.detectChanges();
 
     store.dispatch(recoverPassword());
@@ -115,4 +120,58 @@ describe('LoginPage', () => {
 
     expect(toastController.create).toHaveBeenCalledTimes(1);
   });
+
+  it('should show loading and start login when logging in', () => {
+    fixture.detectChanges();
+
+    component.form.get('email').setValue('valid@email.com');
+    component.form.get('password').setValue('anyPassword');
+    page.querySelector('#loginButton').click();
+
+    store.select('loading').subscribe(loadingState => {
+      expect(loadingState.show).toBeTruthy();
+    })
+
+    store.select('login').subscribe(loginState => {
+      expect(loginState.isLoggingIn).toBeTruthy();
+    })
+  });
+
+  it('should hide loading and send user to home page when user has logged in', () => {
+    spyOn(router, 'navigate');
+    spyOn(authService, 'login').and.returnValue(of(new User()));
+
+    fixture.detectChanges();
+
+    component.form.get('email').setValue('valid@email.com');
+    component.form.get('password').setValue('anyPassword');
+    page.querySelector('#loginButton').click();
+
+    store.select('loading').subscribe(loadingState => {
+      expect(loadingState.show).toBeFalsy();
+    })
+
+    store.select('login').subscribe(loginState => {
+      expect(loginState.isLoggedIn).toBeTruthy();
+    })
+
+    expect(router.navigate).toHaveBeenCalledWith(['tabs']);
+  });
+
+  it('should hide loading and show error when user could not log in', () => {
+    spyOn(authService, 'login').and.returnValue(throwError({message: 'error'}));
+    spyOn(toastController, 'create').and.returnValue(<any> Promise.resolve({present: () => {}}));
+    fixture.detectChanges();
+
+    component.form.get('email').setValue('error@email.com');
+    component.form.get('password').setValue('anyPassword');
+    page.querySelector('#loginButton').click();
+
+    store.select('loading').subscribe(loadingState => {
+      expect(loadingState.show).toBeFalsy();
+    })
+
+    expect(toastController.create).toHaveBeenCalledTimes(1);
+  });
+
 });
