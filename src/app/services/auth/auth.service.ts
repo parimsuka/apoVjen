@@ -26,14 +26,15 @@ export class AuthService {
   login(email: string, password: string) : Observable<User> {
     return new Observable<User>(observer => {
       this.auth.setPersistence(firebase.default.auth.Auth.Persistence.LOCAL).then(() => {
-        this.auth.signInWithEmailAndPassword(email, password).then((firebaseUser: firebase.default.auth.UserCredential) => {
-          observer.next({email, id: firebaseUser.user.uid});
-          observer.complete();
-        }).catch(error => {
-          observer.error(error);
-          observer.complete();
+        this.auth.signInWithEmailAndPassword(email, password)
+          .then((firebaseUser: firebase.default.auth.UserCredential) => {
+            observer.next({email, id: firebaseUser.user.uid});
+            observer.complete();
+          }).catch(error => {
+            observer.error(error);
+            observer.complete();
+          })
         })
       })
-    })
+    }
   }
-}
