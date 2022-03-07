@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoadingComponent } from './components/loading/loading.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +22,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     ...AppStoreModule,
     StoreDevtoolsModule.instrument({maxAge: 25})],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
