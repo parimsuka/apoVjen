@@ -86,7 +86,7 @@ describe('LoginPage', () => {
     spyOn(toastController, 'create').and.returnValue(<any> Promise.resolve({present: () => {}}));
     fixture.detectChanges();
 
-    store.dispatch(recoverPassword());
+    store.dispatch(recoverPassword({email: "any@email.com"}));
 
     store.dispatch(recoverPasswordSuccess());
 
@@ -101,7 +101,7 @@ describe('LoginPage', () => {
     spyOn(toastController, 'create').and.returnValue(<any> Promise.resolve({present: () => {}}));
     fixture.detectChanges();
 
-    store.dispatch(recoverPassword());
+    store.dispatch(recoverPassword({email: "any@email.com"}));
 
     store.dispatch(recoverPasswordFail({error: "message"}));
 
