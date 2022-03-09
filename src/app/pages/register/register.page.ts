@@ -19,7 +19,11 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    this.router.navigate(['tabs']);
+    this.registerForm.getForm().markAllAsTouched();
+
+    if (this.registerForm.getForm().valid) {
+      this.router.navigate(['tabs']);
+    }
   }
 
   private createForm() {
