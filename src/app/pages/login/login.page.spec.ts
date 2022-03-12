@@ -143,7 +143,7 @@ describe('LoginPage', () => {
       expect(loginState.isLoggedIn).toBeTruthy();
     })
 
-    expect(router.navigate).toHaveBeenCalledWith(['tabs']);
+    expect(router.navigate).toHaveBeenCalledWith(['tabs'], Object({}));
   });
 
   it('given user is logging in, when fail, then hide loading and show error message', () => {
