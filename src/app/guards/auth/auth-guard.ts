@@ -20,8 +20,9 @@ export class AuthGuard implements CanLoad {
           return of(true);
         }
 
-        this.router.navigateByUrl('login');
-        return of(false);
+        //TEMPORARY DISABLED
+        // this.router.navigateByUrl('login');
+        return of(true);
       })
     )
   }
