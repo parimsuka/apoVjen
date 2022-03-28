@@ -9,4 +9,12 @@ export class Tab1Page {
 
   constructor() {}
 
+  ngOnInit() {
+    this.generateTrips();
+  }
+
+  generateTrips() {
+  
+  }
+
 }
