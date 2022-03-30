@@ -1,20 +1,20 @@
 <ion-card>
   <ion-card-header>
     <ion-item id="timeAndOwnerOfTrip">
-      <span>Departure: {{time}} </span>
+      <span>Departure: {{data.time}} </span>
       <ion-chip slot="end">
         <ion-avatar>
           <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
         </ion-avatar>
-        <ion-label>{{username}}</ion-label>
+        <ion-label>{{data.username}}</ion-label>
       </ion-chip>
     </ion-item>
-    <ion-card-title>{{from}} <ion-icon name="arrow-forward-outline"></ion-icon> {{to}}</ion-card-title>
+    <ion-card-title>{{data.from}} <ion-icon name="arrow-forward-outline"></ion-icon> {{data.to}}</ion-card-title>
   </ion-card-header>
 
     <ion-item>
       <ion-icon name="car" slot="start" id="carIcon"></ion-icon>
-      <ion-label >Available places: <ion-badge>{{availablePlaces}}</ion-badge></ion-label>
+      <ion-label >Available places: <ion-badge>{{data.availablePlaces}}</ion-badge></ion-label>
       <ion-button fill="outline" slot="end">Book</ion-button>
     </ion-item>
 </ion-card>
