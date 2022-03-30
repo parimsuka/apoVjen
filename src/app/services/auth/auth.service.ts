@@ -4,6 +4,7 @@ import { User } from 'src/app/model/user/User';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as firebase from '../../../../node_modules/firebase/compat';
 import { UserRegister } from 'src/app/model/user/UserRegister';
+import { Trip } from 'src/app/model/trip/Trip';
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +54,16 @@ export class AuthService {
         })
       })
     }
-  }
+
+    createTrip(trip: Trip) : Observable<void> {
+      return new Observable<void>(observer => {
+        console.log(trip);
+        // Fake response
+        // TODO -- Connect to backend calls
+        setTimeout(() => {
+          observer.next();
+          observer.complete();
+        }, 3000)
+      });
+    }
+}

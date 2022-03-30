@@ -1,6 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { IonDatetime, ToastController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 import { format, parseISO } from 'date-fns';
+import { Subscription } from 'rxjs';
+import { AppState } from 'src/store/AppState';
+import { CreateTripState } from 'src/store/createTrip/CreateTrip';
+import { createTrip } from 'src/store/createTrip/createTrip.actions';
+import { hide, show } from 'src/store/loading/loading.actions';
+import { CreateTripPageForm } from './form/createTrip.form';
 
 @Component({
   selector: 'app-tab2',
@@ -10,16 +19,16 @@ import { format, parseISO } from 'date-fns';
 export class Tab2Page {
 
   showPicker: boolean = false;
-  dateValue: string = format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z';
+  dateValue: string;
   formattedDate: string;
 
-  @ViewChild(IonDatetime) datetime: IonDatetime;
-  constructor() {
-    this.setCurrentTime();
-  }
+  createTripForm: CreateTripPageForm;
 
-  private setCurrentTime() {
-    this.formattedDate = format(parseISO(format(new Date(), 'yyyy-MM-dd') + 'T09:00:00.000Z'), 'HH:mm, MMM d, yyyy');
+  createTripStateSubscription: Subscription;
+
+  @ViewChild(IonDatetime) datetime: IonDatetime;
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>,
+    private toastController: ToastController, private router: Router) {
   }
 
   dateChanged(value) {
@@ -34,6 +43,61 @@ export class Tab2Page {
 
   select() {
     this.datetime.confirm(true);
+  }
+
+  ngOnInit() {
+    this.createForm();
+
+    this.watchRegisterState();
+  }
+
+  ngOnDestroy() {
+      this.createTripStateSubscription.unsubscribe();
+  }
+
+  createTrip() {
+    this.createTripForm.getForm().markAllAsTouched();
+
+    if (this.createTripForm.getForm().valid) {
+      this.store.dispatch(createTrip({trip: this.createTripForm.getForm().value}));
+    }
+  }
+
+  private createForm() {
+    this.createTripForm = new CreateTripPageForm(this.formBuilder);
+  }
+
+  private watchRegisterState() {
+    this.createTripStateSubscription = this.store.select('createTrip').subscribe(state => {
+      this.toggleLoading(state);
+
+      this.onCreatedTrip(state);
+      this.onError(state);
+    })
+  }
+
+  private onCreatedTrip(state: CreateTripState) {
+    if (state.isCreated) {
+      this.router.navigate(['tabs'])
+    }
+  }
+
+  private onError(state: CreateTripState) {
+    if (state.error) {
+      this.toastController.create({
+        message: state.error.message,
+        duration: 5000,
+        header: 'Could not create trip'
+      }).then(toast => toast.present());
+    }
+  }
+
+  private toggleLoading(state: CreateTripState) {
+    if(state.isCreating) {
+      this.store.dispatch(show());
+    } else {
+      this.store.dispatch(hide());
+    }
   }
 
 }

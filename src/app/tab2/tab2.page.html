@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form>
+  <form [formGroup]="createTripForm.getForm()">
     <ion-card>
       <ion-card-header>
         <ion-card-title>Contact</ion-card-title>
@@ -16,33 +16,37 @@
       <ion-card-content>
         <ion-item>
           <ion-label>From</ion-label>
-          <ion-select class="custom-options" interface="popover">
+          <ion-select class="custom-options" interface="popover" formControlName="from">
             <ion-select-option value="brown" class="brown-option">Brown</ion-select-option>
             <ion-select-option value="blonde">Blonde</ion-select-option>
             <ion-select-option value="black">Black</ion-select-option>
             <ion-select-option value="red">Red</ion-select-option>
           </ion-select>
         </ion-item>
+        <app-error-message message="From is mandatory" [field]="createTripForm.getForm().get('from')" error="required"></app-error-message>
+
         <ion-item>
           <ion-label>To</ion-label>
-          <ion-select class="custom-options" interface="popover">
+          <ion-select class="custom-options" interface="popover" formControlName="to">
             <ion-select-option value="brown" class="brown-option">Brown</ion-select-option>
             <ion-select-option value="blonde">Blonde</ion-select-option>
             <ion-select-option value="black">Black</ion-select-option>
             <ion-select-option value="red">Red</ion-select-option>
           </ion-select>
         </ion-item>
+        <app-error-message message="To is mandatory" [field]="createTripForm.getForm().get('to')" error="required"></app-error-message>
 
         <ion-item id="open-modal">
           <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
           <ion-label>Pick a date</ion-label>
           <ion-text slot="end">{{formattedDate}}</ion-text>
         </ion-item>
+        <app-error-message message="Picking a date is mandatory" [field]="createTripForm.getForm().get('dateAndTime')" error="required"></app-error-message>
 
         <ion-modal trigger="open-modal">
           <ng-template>
             <ion-content>
-              <ion-datetime #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
+              <ion-datetime formControlName="dateAndTime" #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
                 <ion-buttons slot="buttons">
                   <ion-button (click)="close()">Dismiss</ion-button>
                   <ion-button (click)="select()" color="primary">Select</ion-button>
@@ -54,11 +58,13 @@
 
         <ion-item>
           <ion-label position="floating">Max Available Places</ion-label>
-          <ion-input type="number" value=""></ion-input>
+          <ion-input type="number" value="" formControlName="availablePlaces"></ion-input>
         </ion-item>
+        <app-error-message message="Max available places is mandatory" [field]="createTripForm.getForm().get('availablePlaces')" error="required"></app-error-message>
+
       </ion-card-content>
     </ion-card>
 
-    <ion-button color="light" size="full">Create Trip</ion-button>
+    <ion-button color="light" size="full" (click)="createTrip()">Create Trip</ion-button>
   </form>
 </ion-content>
