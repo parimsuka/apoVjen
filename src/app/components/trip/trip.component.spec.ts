@@ -15,7 +15,6 @@ describe('TripComponent', () => {
 
     fixture = TestBed.createComponent(TripComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   }));
 
   it('should create', () => {

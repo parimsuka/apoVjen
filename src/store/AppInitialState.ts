@@ -15,5 +15,10 @@ export const AppInitialState: AppState = {
         error: null,
         isRegistering: false,
         isRegistered: false
+    },
+    createTrip: {
+        error: null,
+        isCreating: false,
+        isCreated: false
     }
 }
