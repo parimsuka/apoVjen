@@ -14,7 +14,7 @@ export class CreateTripPageForm {
         return this.formBuilder.group({
             from: ['', [Validators.required]],
             to: ['', [Validators.required]],
-            dateAndTime: ['', [Validators.required]],
+            time: ['', [Validators.required]],
             availablePlaces: ['', [Validators.required]]
         });
     }

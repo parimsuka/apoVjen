@@ -19,8 +19,8 @@ describe('CreateTripPageForm', () => {
         expect(form.get('to').valid).toBeFalsy();
     })
     
-    it('should empty \'dateAndTime\' be invalid', () => {
-        expect(form.get('dateAndTime').valid).toBeFalsy();
+    it('should empty \'time\' be invalid', () => {
+        expect(form.get('time').valid).toBeFalsy();
     })
 
     it('should empty max available places be invalid', () => {
@@ -30,7 +30,7 @@ describe('CreateTripPageForm', () => {
     it('should form be valid', () => {
         form.get('from').setValue('anyCity');
         form.get('to').setValue('anyCity');
-        form.get('dateAndTime').setValue('anyDateAndTime');
+        form.get('time').setValue('anyDateAndTime');
         form.get('availablePlaces').setValue('anyNumber');
 
         expect(form.valid).toBeTruthy();

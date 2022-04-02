@@ -18,6 +18,6 @@ export const AppStoreModule = [
     EffectsModule.forFeature([
         LoginEffects,
         RegisterEffects,
-        CreateTripEffects
+        CreateTripEffects,
     ])
 ]

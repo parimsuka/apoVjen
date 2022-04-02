@@ -5,13 +5,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as firebase from '../../../../node_modules/firebase/compat';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import { Trip } from 'src/app/model/trip/Trip';
+import { CreateTripBackendService } from '../create-trip-backend/create-trip-backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth) { }
+  constructor(private auth: AngularFireAuth, private createTripBackEnd: CreateTripBackendService) { }
 
   register(userRegister: UserRegister) : Observable<void> {
     return new Observable<void>(observer => {
@@ -57,13 +58,11 @@ export class AuthService {
 
     createTrip(trip: Trip) : Observable<void> {
       return new Observable<void>(observer => {
-        console.log(trip);
-        // Fake response
-        // TODO -- Connect to backend calls
         setTimeout(() => {
+          this.createTripBackEnd.createTrip(trip).subscribe();
           observer.next();
           observer.complete();
-        }, 3000)
+        }, 2000)
       });
     }
 }

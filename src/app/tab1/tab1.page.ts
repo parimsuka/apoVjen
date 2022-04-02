@@ -1,7 +1,5 @@
 import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
-import { ProcessComponent } from '../components/process';
-import { Trip } from '../model/trip/Trip';
-import { ProcessService } from '../services/process/process.service';
+import { TripsComponent } from '../components/trips/trips.component';
 
 @Component({
   selector: 'app-tab1',
@@ -12,30 +10,29 @@ export class Tab1Page {
   
   @ViewChild('tripsContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
-  constructor(private processService: ProcessService, private resolver: ComponentFactoryResolver) {
+  constructor(private resolver: ComponentFactoryResolver) {
 
+  }
+
+  ionViewDidEnter() {
+    this.generateTrips();
   }
 
   ngOnInit() {
 
   }
 
+  onload() {
+
+  }
+
   ngAfterViewInit() {
-    this.generateTrips();
+    //this.generateTrips();
   }
 
   generateTrips() {
-    let trips = this.processService.getTrips();
-
-    console.log(trips);
-    for (let trip of trips) {
-      const factory = this.resolver.resolveComponentFactory(trip.component);
-
-      const componentRef = this.container.createComponent(factory);
-      (<ProcessComponent>componentRef.instance).data = trip.data;
-    }
+    const factory = this.resolver.resolveComponentFactory(TripsComponent);
+    this.container.clear();
+    this.container.createComponent(factory);
   }
-
-  
-
 }
