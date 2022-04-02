@@ -41,12 +41,12 @@
           <ion-label>Pick a date</ion-label>
           <ion-text slot="end">{{formattedDate}}</ion-text>
         </ion-item>
-        <app-error-message message="Picking a date is mandatory" [field]="createTripForm.getForm().get('dateAndTime')" error="required"></app-error-message>
+        <app-error-message message="Picking a date is mandatory" [field]="createTripForm.getForm().get('time')" error="required"></app-error-message>
 
         <ion-modal trigger="open-modal">
           <ng-template>
             <ion-content>
-              <ion-datetime formControlName="dateAndTime" #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
+              <ion-datetime formControlName="time" #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
                 <ion-buttons slot="buttons">
                   <ion-button (click)="close()">Dismiss</ion-button>
                   <ion-button (click)="select()" color="primary">Select</ion-button>

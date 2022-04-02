@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ProcessItem } from 'src/app/components/proces-item';
 import { TripComponent } from 'src/app/components/trip/trip.component';
+import { Trip } from 'src/app/model/trip/Trip';
+import { CreateTripBackendService } from '../create-trip-backend/create-trip-backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessService {
+
+  trips: Trip[] = [];
+
+  ngOnInit() {
+  }
 
   private dummyJSONResponse = {
     items: [
@@ -26,7 +33,7 @@ export class ProcessService {
     ],
   }
 
-  constructor() { }
+  constructor(private createTripBackEnd: CreateTripBackendService) { }
 
   getTrips() : ProcessItem[] {
     let result: ProcessItem[] = [];

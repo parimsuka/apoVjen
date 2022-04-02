@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { ErrorMessageModule } from '../components/error-message/error-message.module';
+import { TripsComponent } from '../components/trips/trips.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ErrorMessageModule } from '../components/error-message/error-message.mo
     ReactiveFormsModule,
     ErrorMessageModule
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page],
+  providers: [TripsComponent]
 })
 export class Tab2PageModule {}

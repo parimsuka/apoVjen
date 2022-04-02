@@ -12,6 +12,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import { environment } from 'src/environments/environment';
     LoadingComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     ...AppStoreModule,
     StoreDevtoolsModule.instrument({maxAge: 25})],

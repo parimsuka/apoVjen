@@ -78,7 +78,7 @@ export class Tab2Page {
 
   private onCreatedTrip(state: CreateTripState) {
     if (state.isCreated) {
-      this.router.navigate(['tabs'])
+      this.router.navigate(['tabs/tab1']);
     }
   }
 
