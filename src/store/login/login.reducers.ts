@@ -1,6 +1,6 @@
 import { LoginState } from "./LoginState";
 import { createReducer, on } from "@ngrx/store";
-import { login, loginFail, loginSuccess, recoverPassword, recoverPasswordFail, recoverPasswordSuccess } from "./login.actions";
+import { login, loginFail, loginSuccess, recoverPassword, recoverPasswordFail, recoverPasswordSuccess, signOut, signOutFail, signOutSuccess } from "./login.actions";
 import { AppInitialState } from "../AppInitialState";
 
 const initialState: LoginState = AppInitialState.login;
@@ -10,14 +10,16 @@ const reducer = createReducer(initialState,
         return {
             ...currentState,
             isRecoveredPassword: false,
-            isRecoveringPassword: true
+            isRecoveringPassword: true,
+            isSigningOut: false
         };
     }),
     on(recoverPasswordSuccess, currentState => {
         return {
             ...currentState,
             isRecoveredPassword: true,
-            isRecoveringPassword: false
+            isRecoveringPassword: false,
+            isSigningOut: false
         };
     }),
     on(recoverPasswordFail, (currentState, action) => {
@@ -25,7 +27,8 @@ const reducer = createReducer(initialState,
             ...currentState,
             error: action.error,
             isRecoveredPassword: false,
-            isRecoveringPassword: false
+            isRecoveringPassword: false,
+            isSigningOut: false
         };
     }),
     on(login, currentState => {
@@ -33,15 +36,18 @@ const reducer = createReducer(initialState,
             ...currentState,
             error: null,
             isLoggedIn: false,
-            isLoggingIn: true
+            isLoggingIn: true,
+            isSigningOut: false
         }
     }),
-    on(loginSuccess, currentState => {
+    on(loginSuccess, (currentState, user) => {
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
         return {
             ...currentState,
             error: null,
             isLoggedIn: true,
-            isLoggingIn: false
+            isLoggingIn: false,
+            isSigningOut: false
         }
     }),
     on(loginFail, (currentState, action) => {
@@ -49,7 +55,33 @@ const reducer = createReducer(initialState,
             ...currentState,
             error: action.error,
             isLoggedIn: false,
-            isLoggingIn: false
+            isLoggingIn: false,
+            isSigningOut: false
+        }
+    }),
+    on(signOut, currentState => {
+        return {
+            ...currentState,
+            isLoggedIn: true,
+            isLoggingIn: false,
+            isSigningOut: true
+        }
+    }),
+    on(signOutSuccess, currentState => {
+        return {
+            ...currentState,
+            isLoggedIn: false,
+            isLoggingIn: false,
+            isSigningOut: false
+        }
+    }),
+    on(signOutFail, (currentState, action) => {
+        return {
+            ...currentState,
+            error: action.error,
+            isLoggedIn: true,
+            isLoggingIn: false,
+            isSigningOut: false
         }
     })
 )

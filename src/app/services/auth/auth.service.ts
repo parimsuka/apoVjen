@@ -6,13 +6,14 @@ import * as firebase from '../../../../node_modules/firebase/compat';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import { Trip } from 'src/app/model/trip/Trip';
 import { CreateTripBackendService } from '../create-trip-backend/create-trip-backend.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth, private createTripBackEnd: CreateTripBackendService) { }
+  constructor(private auth: AngularFireAuth, private createTripBackEnd: CreateTripBackendService, private router: Router) { }
 
   register(userRegister: UserRegister) : Observable<void> {
     return new Observable<void>(observer => {
@@ -46,7 +47,8 @@ export class AuthService {
       this.auth.setPersistence(firebase.default.auth.Auth.Persistence.LOCAL).then(() => {
         this.auth.signInWithEmailAndPassword(email, password)
           .then((firebaseUser: firebase.default.auth.UserCredential) => {
-            observer.next({email, id: firebaseUser.user.uid});
+            const user = {email, id: firebaseUser.user.uid};
+            observer.next(user);
             observer.complete();
           }).catch(error => {
             observer.error(error);
@@ -54,6 +56,23 @@ export class AuthService {
           })
         })
       })
+    }
+
+    signOut(): Observable<void> {
+      return new Observable<void>(observer => {
+        setTimeout(() => {
+            this.auth.signOut().then(() => {
+              observer.next();
+
+              localStorage.removeItem('loggedInUser');
+              console.log('user removed');
+              observer.complete();
+            }).catch(error => {
+              observer.error(error);
+              observer.complete();
+            })
+          }, 1000);
+        })
     }
 
     createTrip(trip: Trip) : Observable<void> {
