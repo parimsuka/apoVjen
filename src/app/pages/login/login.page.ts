@@ -52,7 +52,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   private onIsLoggedIn(loginState: LoginState) {
-    if(loginState.isLoggedIn) {
+    if(loginState.isLoggedIn && localStorage.getItem('loggedInUser') !== null) {
       this.navController.navigateRoot(['tabs']);
     }
   }

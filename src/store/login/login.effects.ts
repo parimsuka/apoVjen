@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { login, loginFail, loginSuccess, recoverPassword, recoverPasswordFail, recoverPasswordSuccess, signOut, signOutFail, signOutSuccess } from "./login.actions";
+import { login, loginFail, loginSuccess, recoverPassword, recoverPasswordFail, recoverPasswordSuccess } from "./login.actions";
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { AuthService } from "src/app/services/auth/auth.service";
 import { of } from "rxjs";
@@ -25,14 +25,6 @@ export class LoginEffects {
         switchMap((payload: {email: string, password: string}) => this.authService.login(payload.email, payload.password).pipe(
             map(user => loginSuccess({user})),
             catchError(error => of(loginFail({error})))
-        ))
-    ))
-
-    signOut$ = createEffect(() => this.actions$.pipe(
-        ofType(signOut),
-        switchMap(() => this.authService.signOut().pipe(
-            map(() => signOutSuccess()),
-            catchError(error => of(signOutFail({error})))
         ))
     ))
 

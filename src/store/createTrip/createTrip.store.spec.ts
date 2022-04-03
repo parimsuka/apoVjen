@@ -10,6 +10,7 @@ describe("Create trip store", () => {
 
         const newState = createTripReducer(initialState, createTrip({
             trip: {
+                id: 'anyId',
                 time: '15:15',
                 username: 'anyName',
                 from: 'anyCity',

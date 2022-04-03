@@ -7,6 +7,8 @@ import { LoginEffects } from "./login/login.effects";
 import { loginReducer } from "./login/login.reducers";
 import { RegisterEffects } from "./register/register.effects";
 import { registerReducer } from "./register/register.reducers";
+import { SignOutEffects } from "./signout/signout.effects";
+import { signOutReducer } from "./signout/signout.reducers";
 
 export const AppStoreModule = [
     StoreModule.forRoot([]),
@@ -14,10 +16,12 @@ export const AppStoreModule = [
     StoreModule.forFeature("login", loginReducer),
     StoreModule.forFeature("register", registerReducer),
     StoreModule.forFeature("createTrip", createTripReducer),
+    StoreModule.forFeature("signOut", signOutReducer),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
         LoginEffects,
         RegisterEffects,
         CreateTripEffects,
+        SignOutEffects
     ])
 ]
