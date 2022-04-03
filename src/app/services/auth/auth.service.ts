@@ -63,9 +63,6 @@ export class AuthService {
         setTimeout(() => {
             this.auth.signOut().then(() => {
               observer.next();
-
-              localStorage.removeItem('loggedInUser');
-              console.log('user removed');
               observer.complete();
             }).catch(error => {
               observer.error(error);

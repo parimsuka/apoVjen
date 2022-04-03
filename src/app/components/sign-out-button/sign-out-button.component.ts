@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/store/AppState';
 import { hide, show } from 'src/store/loading/loading.actions';
-import { signOut } from 'src/store/login/login.actions';
-import { LoginState } from 'src/store/login/LoginState';
+import { signOut } from 'src/store/signout/signout.actions';
+import { SignOutState } from 'src/store/signout/SignOutState';
 
 @Component({
   selector: 'app-sign-out-button',
@@ -14,34 +14,34 @@ import { LoginState } from 'src/store/login/LoginState';
 })
 export class SignOutButtonComponent implements OnInit {
 
-  loginStateSubscription: Subscription;
+  signOutStateSubscription: Subscription;
 
   constructor(private store: Store<AppState>, private navController: NavController) { }
 
   ngOnInit() {
-    this.loginStateSubscription = this.store.select('login').subscribe(loginState => {
-      this.onSignedOut(loginState);
+    this.signOutStateSubscription = this.store.select('signOut').subscribe(signOutState => {
+      this.onSignedOut(signOutState);
 
-      this.toggleLoading(loginState);
+      this.toggleLoading(signOutState);
     })
   }
 
   ngOnDestroy() {
-    if(this.loginStateSubscription) {
-      this.loginStateSubscription.unsubscribe();
+    if(this.signOutStateSubscription) {
+      this.signOutStateSubscription.unsubscribe();
     }
   }
 
-  private toggleLoading(loginState: LoginState) {
-    if(loginState.isSigningOut) {
+  private toggleLoading(signOutState: SignOutState) {
+    if(signOutState.isSigningOut) {
       this.store.dispatch(show());
     } else {
       this.store.dispatch(hide());
     }
   }
 
-  private onSignedOut(loginState: LoginState) {
-    if(!loginState.isLoggedIn) {
+  private onSignedOut(signOutState: SignOutState) {
+    if(signOutState.isSignedOut && localStorage.getItem('loggedInUser') === null) {
       this.navController.navigateRoot(['login']);
     }
   }

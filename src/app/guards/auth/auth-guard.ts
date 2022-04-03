@@ -16,7 +16,6 @@ export class AuthGuard implements CanLoad {
     return this.store.select('login').pipe(
       take(1),
       switchMap(loginState => {
-        console.log(loginState.isLoggedIn);
         if(loginState.isLoggedIn || localStorage.getItem('loggedInUser') !== null) {
           return of(true);
         }
