@@ -16,13 +16,13 @@ export class AuthGuard implements CanLoad {
     return this.store.select('login').pipe(
       take(1),
       switchMap(loginState => {
-        if(loginState.isLoggedIn) {
+        console.log(loginState.isLoggedIn);
+        if(loginState.isLoggedIn || localStorage.getItem('loggedInUser') !== null) {
           return of(true);
         }
 
-        //TEMPORARY DISABLED
-        // this.router.navigateByUrl('login');
-        return of(true);
+        this.router.navigateByUrl('login');
+        return of(false);
       })
     )
   }
