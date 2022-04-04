@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
-import { TripsComponent } from '../components/trips/trips.component';
+import { TripsComponent } from '../../components/trips/trips.component';
 
 @Component({
   selector: 'app-tab1',

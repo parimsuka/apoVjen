@@ -2,6 +2,8 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { CreateTripEffects } from "./createTrip/createTrip.effects";
 import { createTripReducer } from "./createTrip/createTrip.reducers";
+import { EditProfileEffects } from "./editProfile/editProfile.effects";
+import { editProfileReducer } from "./editProfile/editProfile.reducers";
 import { loadingReducer } from "./loading/loading.reducers";
 import { LoginEffects } from "./login/login.effects";
 import { loginReducer } from "./login/login.reducers";
@@ -17,11 +19,13 @@ export const AppStoreModule = [
     StoreModule.forFeature("register", registerReducer),
     StoreModule.forFeature("createTrip", createTripReducer),
     StoreModule.forFeature("signOut", signOutReducer),
+    StoreModule.forFeature("editProfile", editProfileReducer),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
         LoginEffects,
         RegisterEffects,
         CreateTripEffects,
-        SignOutEffects
+        SignOutEffects,
+        EditProfileEffects
     ])
 ]

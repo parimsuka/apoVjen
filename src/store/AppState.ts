@@ -1,4 +1,5 @@
 import { CreateTripState } from "./createTrip/CreateTrip";
+import { EditProfileState } from "./editProfile/EditProfileState";
 import { LoadingState } from "./loading/LoadingState";
 import { LoginState } from "./login/LoginState";
 import { RegisterState } from "./register/RegisterState";
@@ -10,4 +11,5 @@ export interface AppState {
     register: RegisterState;
     createTrip: CreateTripState;
     signOut: SignOutState;
+    editProfile: EditProfileState;
 }
