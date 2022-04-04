@@ -25,5 +25,10 @@ export const AppInitialState: AppState = {
         error: null,
         isSigningOut: false,
         isSignedOut: true
+    },
+    editProfile: {
+        error: null,
+        isEditingProfile: false,
+        isProfileEdited: false
     }
 }
