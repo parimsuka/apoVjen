@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 
-export class RegisterPageForm {
+export class ChangePasswordForm {
 
     private formBuilder: FormBuilder;
     private form: FormGroup;
@@ -12,18 +12,9 @@ export class RegisterPageForm {
 
     private createForm() : FormGroup {
         let form = this.formBuilder.group({
-            name: ['', [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
+            currentPassword: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            repeatPassword: [''],
-            phone: ['', [Validators.required]],
-            address: this.formBuilder.group({
-                address: ['', [Validators.required]],
-                number: ['', [Validators.required]],
-                zip: ['', [Validators.required]],
-                state: ['', [Validators.required]],
-                city: ['', [Validators.required]]
-            })
+            repeatPassword: ['']
         });
 
         form.get('repeatPassword').setValidators(matchPasswordAndRepeatPassword(form));

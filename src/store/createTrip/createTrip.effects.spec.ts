@@ -43,6 +43,7 @@ describe('Create trip effects', () => {
     it('should create trip with valid data and return success', (done) => {
         actions$ = of(createTrip({
             trip: {
+                id: 'anyId',
                 time: '15:15',
                 username: 'anyName',
                 from: 'anyCity',

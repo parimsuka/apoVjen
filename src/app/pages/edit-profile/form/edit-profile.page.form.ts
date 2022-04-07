@@ -5,7 +5,6 @@ export class EditProfilePageForm {
 
     private formBuilder: FormBuilder;
     private form: FormGroup;
-    private loggedInUser: UserRegister;
 
     constructor(formBuilder: FormBuilder) {
         this.formBuilder = formBuilder;
@@ -14,15 +13,30 @@ export class EditProfilePageForm {
 
     private createForm() : FormGroup {
         return this.formBuilder.group({
-            name: ['edit me', [Validators.required]],
-            email: ['example@email.com', [Validators.required, Validators.email]],
-            phone: ['s', [Validators.required]],
+            name: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            phone: ['', [Validators.required]],
             address: this.formBuilder.group({
-                address: ['s', [Validators.required]],
-                number: ['s', [Validators.required]],
-                zip: ['s', [Validators.required]],
-                state: ['s', [Validators.required]],
-                city: ['s', [Validators.required]]
+                address: ['', [Validators.required]],
+                number: ['', [Validators.required]],
+                zip: ['', [Validators.required]],
+                state: ['', [Validators.required]],
+                city: ['', [Validators.required]]
+            })
+        });
+    }
+
+    setForm(loggedInUser: UserRegister): void {
+        this.form = this.formBuilder.group({
+            name: [loggedInUser.name, [Validators.required]],
+            email: [loggedInUser.email, [Validators.required, Validators.email]],
+            phone: [loggedInUser.phone, [Validators.required]],
+            address: this.formBuilder.group({
+                address: [loggedInUser.address.address, [Validators.required]],
+                number: [loggedInUser.address.number, [Validators.required]],
+                zip: [loggedInUser.address.zip, [Validators.required]],
+                state: [loggedInUser.address.state, [Validators.required]],
+                city: [loggedInUser.address.city, [Validators.required]]
             })
         });
     }

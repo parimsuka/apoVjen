@@ -5,29 +5,28 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as firebase from '../../../../node_modules/firebase/compat';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import { Trip } from 'src/app/model/trip/Trip';
-import { CreateTripBackendService } from '../create-trip-backend/create-trip-backend.service';
-import { Router } from '@angular/router';
+import { BackendService } from '../backend/backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth, private createTripBackEnd: CreateTripBackendService, private router: Router) { }
+  constructor(private auth: AngularFireAuth, private backEndService: BackendService) { }
 
   register(userRegister: UserRegister) : Observable<void> {
     return new Observable<void>(observer => {
-      // Fake response
-      // TODO -- Connect to backend calls
-      setTimeout(() => {
-        if (userRegister.email == "error@email.com") {
-          observer.error({message: "Email already registered"});
-        } else {
+      this.backEndService.registerUser(userRegister).toPromise().then(() => {
+        setTimeout(() => {
           observer.next();
-        }
+          observer.complete();
+        }, 2000)
+      }).catch(error => {
+        observer.error(error);
         observer.complete();
-      }, 3000)
-    });
+      })
+    })
+    
   }
 
   recoverEmailPassword(email: string) : Observable<void> {
@@ -72,13 +71,25 @@ export class AuthService {
         })
     }
 
-    createTrip(trip: Trip) : Observable<void> {
+    editProfile(userRegister: UserRegister) {
+      const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
       return new Observable<void>(observer => {
         setTimeout(() => {
-          this.createTripBackEnd.createTrip(trip).subscribe();
+          this.backEndService.editProfile(loggedInUserID, userRegister).subscribe();
           observer.next();
           observer.complete();
         }, 2000)
       });
+    }
+
+    changePassword(password: {password: string}) {
+      const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+      return new Observable<void>(observer => {
+        setTimeout(() => {
+          this.backEndService.changeUserPassword(loggedInUserID, password).subscribe();
+            observer.next();
+            observer.complete();
+          }, 3000);
+        })
     }
 }

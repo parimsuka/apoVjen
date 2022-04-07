@@ -5,7 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { UserRegister } from 'src/app/model/user/UserRegister';
-import { CreateTripBackendService } from 'src/app/services/create-trip-backend/create-trip-backend.service';
+import { BackendService } from 'src/app/services/backend/backend.service';
 import { AppState } from 'src/store/AppState';
 import { editProfile } from 'src/store/editProfile/editProfile.actions';
 import { EditProfileState } from 'src/store/editProfile/EditProfileState';
@@ -22,18 +22,19 @@ export class EditProfilePage implements OnInit {
   editProfilePageForm: EditProfilePageForm;
   editProfileStateSubscription: Subscription;
 
-  loggedInUser: any;
+  loggedInUser: UserRegister;
 
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>, private toastController: ToastController,
-              private router: Router, private backEnd: CreateTripBackendService) { }
+              private router: Router, private backEnd: BackendService) { }
 
   ngOnInit() {
     this.createForm();
 
     this.watchEditProfileState();
+  }
 
-
-    //this.backEnd.getLoggedInUser(JSON.parse(localStorage.getItem('loggedInUser')).user.id).subscribe(user => this.loggedInUser = user);
+  ionViewDidEnter() {
+    this.initializeLoggedInUser();
   }
 
   ngOnDestroy() {
@@ -83,6 +84,14 @@ export class EditProfilePage implements OnInit {
     } else {
       this.store.dispatch(hide());
     }
+  }
+
+  private initializeLoggedInUser() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.backEnd.getLoggedInUser(loggedInUserID).subscribe(user => {
+      this.loggedInUser = user;
+      this.editProfilePageForm.setForm(this.loggedInUser);
+    });
   }
 
 }
