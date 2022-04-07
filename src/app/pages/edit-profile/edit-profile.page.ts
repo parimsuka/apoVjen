@@ -22,8 +22,6 @@ export class EditProfilePage implements OnInit {
   editProfilePageForm: EditProfilePageForm;
   editProfileStateSubscription: Subscription;
 
-  loggedInUser: UserRegister;
-
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>, private toastController: ToastController,
               private router: Router, private backEnd: BackendService) { }
 
@@ -88,9 +86,8 @@ export class EditProfilePage implements OnInit {
 
   private initializeLoggedInUser() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
-    this.backEnd.getLoggedInUser(loggedInUserID).subscribe(user => {
-      this.loggedInUser = user;
-      this.editProfilePageForm.setForm(this.loggedInUser);
+    this.backEnd.getUser(loggedInUserID).subscribe(user => {
+      this.editProfilePageForm.setForm(user);
     });
   }
 

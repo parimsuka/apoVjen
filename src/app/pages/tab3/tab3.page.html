@@ -19,11 +19,17 @@
   <ion-content fullscreen="true" slot="fixed" >
     <div class="card">
       <div class="header">
-        <ion-avatar>
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        <ion-avatar (click)="fileInput.click()">
+          <img src="{{img}}">
         </ion-avatar>
+        <ion-icon name="camera-outline" size="large" (click)="fileInput.click()"></ion-icon>
       </div>
     </div>
+
+    <input
+      style="display: none"
+      type="file" (change)="changeProfilePic($event)"
+      #fileInput>
 
     <div class="card-body">
       <div class="user-meta ion-text-center">
@@ -40,7 +46,7 @@
         </ion-modal>
 
 
-        <h3 class="playername">Filan Fisteku</h3>
+        <h3 class="playername">{{userName}}</h3>
         <h6 class="ranking">My trips: <ion-chip>
           <ion-label>2</ion-label>
           </ion-chip>

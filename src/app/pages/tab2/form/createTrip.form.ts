@@ -15,12 +15,17 @@ export class CreateTripPageForm {
             from: ['', [Validators.required]],
             to: ['', [Validators.required]],
             time: ['', [Validators.required]],
-            availablePlaces: ['', [Validators.required]]
+            availablePlaces: ['', [Validators.required]],
+            username: ['']
         });
     }
 
     getForm() : FormGroup {
         return this.form;
+    }
+
+    addUserName(name: string) : void {
+        this.getForm().get('username').setValue(name);
     }
 
 }

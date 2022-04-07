@@ -1,4 +1,5 @@
 import { ChangePasswordState } from "./changePassword/ChangePasswordState";
+import { ChangeProfilePicState } from "./changeProfilePic/ChangeProfilePicState";
 import { CreateTripState } from "./createTrip/CreateTrip";
 import { EditProfileState } from "./editProfile/EditProfileState";
 import { LoadingState } from "./loading/LoadingState";
@@ -14,4 +15,5 @@ export interface AppState {
     signOut: SignOutState;
     editProfile: EditProfileState;
     changePassword: ChangePasswordState;
+    changeProfilePic: ChangeProfilePicState;
 }

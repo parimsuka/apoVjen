@@ -5,6 +5,7 @@ import { IonDatetime, ToastController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { format, parseISO } from 'date-fns';
 import { Subscription } from 'rxjs';
+import { BackendService } from 'src/app/services/backend/backend.service';
 import { AppState } from 'src/store/AppState';
 import { CreateTripState } from 'src/store/createTrip/CreateTrip';
 import { createTrip } from 'src/store/createTrip/createTrip.actions';
@@ -28,7 +29,21 @@ export class Tab2Page {
 
   @ViewChild(IonDatetime) datetime: IonDatetime;
   constructor(private formBuilder: FormBuilder, private store: Store<AppState>,
-    private toastController: ToastController, private router: Router) {
+    private toastController: ToastController, private router: Router, private backEnd: BackendService) {
+  }
+
+  ngOnInit() {
+    this.createForm();
+
+    this.watchRegisterState();
+  }
+
+  ionViewDidEnter() {
+    this.addUserNameToForm();
+  }
+
+  ngOnDestroy() {
+      this.createTripStateSubscription.unsubscribe();
   }
 
   dateChanged(value) {
@@ -43,16 +58,6 @@ export class Tab2Page {
 
   select() {
     this.datetime.confirm(true);
-  }
-
-  ngOnInit() {
-    this.createForm();
-
-    this.watchRegisterState();
-  }
-
-  ngOnDestroy() {
-      this.createTripStateSubscription.unsubscribe();
   }
 
   createTrip() {
@@ -98,6 +103,13 @@ export class Tab2Page {
     } else {
       this.store.dispatch(hide());
     }
+  }
+
+  private addUserNameToForm() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.backEnd.getUser(loggedInUserID).subscribe(user => {
+      this.createTripForm.addUserName(user.name);
+    });
   }
 
 }

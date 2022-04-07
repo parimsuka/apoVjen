@@ -4,7 +4,6 @@ import { User } from 'src/app/model/user/User';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as firebase from '../../../../node_modules/firebase/compat';
 import { UserRegister } from 'src/app/model/user/UserRegister';
-import { Trip } from 'src/app/model/trip/Trip';
 import { BackendService } from '../backend/backend.service';
 
 @Injectable({
@@ -91,5 +90,31 @@ export class AuthService {
             observer.complete();
           }, 3000);
         })
+    }
+
+    changeProfilePicture(file: {img: File}) {
+      const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+      return new Observable<void>(observer => {
+        firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').put(file.img).then(() => {
+          observer.next();
+          observer.complete();
+        }).catch(error => {
+          observer.error(error);
+          observer.complete();
+        })
+      })
+
+      // const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+      // return new Observable<void>(observer => {
+      //   this.backEndService.changeProfilePic(loggedInUserID, file).toPromise().then(() => {
+      //     setTimeout(() => {
+      //       observer.next();
+      //       observer.complete();
+      //     }, 2000)
+      //   }).catch(error => {
+      //     observer.error(error);
+      //     observer.complete();
+      //   })
+      // })
     }
 }
