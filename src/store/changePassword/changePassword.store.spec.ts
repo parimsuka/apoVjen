@@ -1,0 +1,4 @@
+describe('SignOut store', () => {
+
+
+})

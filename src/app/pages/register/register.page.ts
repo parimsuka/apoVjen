@@ -67,8 +67,8 @@ export class RegisterPage implements OnInit, OnDestroy {
   private onError(state: RegisterState) {
     if (state.error) {
       this.toastController.create({
-        message: state.error.message,
-        duration: 5000,
+        message: JSON.parse(state.error).error,
+        duration: 3000,
         header: 'Registration not done'
       }).then(toast => toast.present());
     }

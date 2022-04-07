@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/model/trip/Trip';
-import { CreateTripBackendService } from 'src/app/services/create-trip-backend/create-trip-backend.service';
+import { BackendService } from 'src/app/services/backend/backend.service';
 
 @Component({
   selector: 'app-trips',
@@ -11,20 +11,20 @@ export class TripsComponent implements OnInit {
 
   trips: Trip[];
 
-  constructor(private createTripBackEnd: CreateTripBackendService) { }
+  constructor(private backEndService: BackendService) { }
 
   ngOnInit() { 
     this.initializeTrips();
   }
 
   initializeTrips() {
-    this.createTripBackEnd.getAllTrips().subscribe(trips => {
+    this.backEndService.getAllTrips().subscribe(trips => {
       this.trips = trips;
     });
   }
 
   addTrip(trip: Trip) {
-    this.createTripBackEnd.createTrip(trip).subscribe(tripID => {
+    this.backEndService.createTrip(trip).subscribe(tripID => {
       console.log(tripID);
       this.trips.push(trip);
     })

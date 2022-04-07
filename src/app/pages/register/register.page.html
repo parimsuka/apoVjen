@@ -55,9 +55,9 @@
       <ion-card-content formGroupName="address">
         <ion-item>
           <ion-label position="floating">Address</ion-label>
-          <ion-input type="text" formControlName="street"></ion-input>
+          <ion-input type="text" formControlName="address"></ion-input>
         </ion-item>
-        <app-error-message message="Street is mandatory" [field]="registerForm.getForm().get('address').get('street')" error="required"></app-error-message>
+        <app-error-message message="Street is mandatory" [field]="registerForm.getForm().get('address').get('address')" error="required"></app-error-message>
 
         <ion-item>
           <ion-label position="floating">Number</ion-label>

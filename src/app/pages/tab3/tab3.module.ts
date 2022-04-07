@@ -7,6 +7,8 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { ChangePasswordFormComponent } from 'src/app/components/change-password-form/change-password-form.component';
+import { ErrorMessageModule } from 'src/app/components/error-message/error-message.module';
 
 @NgModule({
   imports: [
@@ -16,9 +18,11 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorMessageModule
   ],
   declarations: [
-    Tab3Page]
+    Tab3Page,
+    ChangePasswordFormComponent]
 })
 export class Tab3PageModule {}
