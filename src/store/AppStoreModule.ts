@@ -2,6 +2,8 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { ChangePasswordEffects } from "./changePassword/changePassword.effects";
 import { changePasswordReducer } from "./changePassword/changePassword.reducers";
+import { ChangeProfilePicEffects } from "./changeProfilePic/changeProfilePic.effects";
+import { changeProfilePicReducer } from "./changeProfilePic/changeProfilePic.reducers";
 import { CreateTripEffects } from "./createTrip/createTrip.effects";
 import { createTripReducer } from "./createTrip/createTrip.reducers";
 import { EditProfileEffects } from "./editProfile/editProfile.effects";
@@ -23,6 +25,7 @@ export const AppStoreModule = [
     StoreModule.forFeature("signOut", signOutReducer),
     StoreModule.forFeature("editProfile", editProfileReducer),
     StoreModule.forFeature("changePassword", changePasswordReducer),
+    StoreModule.forFeature("changeProfilePic", changeProfilePicReducer),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
         LoginEffects,
@@ -30,6 +33,7 @@ export const AppStoreModule = [
         CreateTripEffects,
         SignOutEffects,
         EditProfileEffects,
-        ChangePasswordEffects
+        ChangePasswordEffects,
+        ChangeProfilePicEffects
     ])
 ]

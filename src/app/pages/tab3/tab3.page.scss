@@ -13,6 +13,7 @@ ion-toolbar {
     margin: 0 auto;
 
     .header {
+        position: relative;
         height: 200px;
 
         ion-avatar {
@@ -29,6 +30,13 @@ ion-toolbar {
                 border: 8px solid #9Dc912;
                 background-color: #fff;
             }
+        }
+
+        ion-icon {
+            display: block;
+            position: absolute;
+            bottom: -30px;
+            right: 120px;
         }
     }
 }

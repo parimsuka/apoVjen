@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Trip } from 'src/app/model/trip/Trip';
 import { UserRegister } from 'src/app/model/user/UserRegister';
+import * as firebase from '../../../../node_modules/firebase/compat';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class BackendService {
     return this.httpClient.patch(this.backEndURL + '/users/' + id, userRegister, {observe: 'body', responseType: 'json'});
   }
 
-  getLoggedInUser(id: string) {
+  getUser(id: string) {
     return this.httpClient.get<UserRegister>(this.backEndURL + '/users/' + id, {observe: 'body', responseType: 'json'});
   }
 
@@ -37,8 +38,17 @@ export class BackendService {
   }
 
   changeUserPassword(id:string, password: {password: string}) {
-    console.log('id: ', id, password);
     return this.httpClient.patch(this.backEndURL + '/users/changePassword/' + id, password, {observe: 'body', responseType: 'json'});
+  }
+
+  changeProfilePic(id:string, file: {img:File}) {
+    console.log(file);
+    return this.httpClient.post(this.backEndURL + '/storage/' + id, file, {observe: 'body', responseType: 'json'});
+  }
+
+  getProfilePictureURL() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    return firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').getDownloadURL();
   }
 
 }

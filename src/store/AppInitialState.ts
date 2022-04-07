@@ -35,5 +35,10 @@ export const AppInitialState: AppState = {
         error: null,
         isChangingPassword: false,
         isPasswordChanged: false
+    },
+    changeProfilePic: {
+        error: null,
+        isChangingProfilePic: false,
+        isProfilePicChanged: false
     }
 }
