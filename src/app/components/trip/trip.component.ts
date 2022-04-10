@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Trip } from 'src/app/model/trip/Trip';
 
 @Component({
@@ -10,7 +11,11 @@ export class TripComponent implements OnInit {
   
   @Input() data: Trip;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
+
+  goToTripDetails() {
+    this.router.navigate(['/tabs/trip', {tripData: JSON.stringify(this.data)}]);
+  }
 }

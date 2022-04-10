@@ -5,4 +5,5 @@ export class Trip {
     from: string;
     to: string;
     availablePlaces: string;
+    bookedBy: string[]
 }

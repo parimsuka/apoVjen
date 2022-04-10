@@ -25,7 +25,6 @@ export class TripsComponent implements OnInit {
 
   addTrip(trip: Trip) {
     this.backEndService.createTrip(trip).subscribe(tripID => {
-      console.log(tripID);
       this.trips.push(trip);
     })
   }

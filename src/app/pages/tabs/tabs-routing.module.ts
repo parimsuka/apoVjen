@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
       },
       {
+        path: 'trip',
+        loadChildren: () => import('../trip/trip.module').then( m => m.TripPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

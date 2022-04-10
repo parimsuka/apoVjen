@@ -51,4 +51,9 @@ export class BackendService {
     return firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').getDownloadURL();
   }
 
+  bookTrip(data: {userID: string, tripID: string}) {
+    return this.httpClient.post(this.backEndURL + '/book-trip', data, {observe: 'body', responseType: 'text' as 'json'});
+
+  }
+
 }

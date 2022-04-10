@@ -117,4 +117,13 @@ export class AuthService {
       //   })
       // })
     }
+
+
+
+    //To be used later
+    checkUserLoggedin() {
+      firebase.default.auth().onAuthStateChanged(function(user) {
+        console.log(user);
+      });
+    }
 }
