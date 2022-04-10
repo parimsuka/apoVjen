@@ -34,7 +34,7 @@ export class LoginPage implements OnInit, OnDestroy {
       this.onError(loginState);
 
       this.toggleLoading(loginState);
-    })
+    });
   }
 
   ngOnDestroy() {

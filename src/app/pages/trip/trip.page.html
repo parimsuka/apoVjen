@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Trip Details</ion-title>
+    <app-book-button slot="end" [trip]="trip"></app-book-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item id="timeAndOwnerOfTrip">
+    <ion-text>Owner of the trip: </ion-text>
+    <ion-chip slot="">
+      <!-- <ion-avatar>
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar> -->
+      <ion-label>{{trip.username}}</ion-label>
+    </ion-chip>
+
+  </ion-item>
+
+    <h2><ion-icon name="disc-sharp"></ion-icon> <ion-text>13:30</ion-text> {{trip.from}} </h2>
+    <h2><ion-icon name="ellipsis-vertical-sharp"></ion-icon></h2>
+    <!-- <h2><ion-icon name="arrow-forward-outline"></ion-icon></h2> -->
+    <h2><ion-icon name="location-sharp"></ion-icon> <ion-text>15:30</ion-text> {{trip.to}} </h2>
+
+    <br>
+      
+    <ion-item>
+      <ion-icon name="time-sharp" slot="end"></ion-icon><ion-text>1h 30mins</ion-text>
+    </ion-item>
+
+    <br>
+
+    <ion-button expand="block" fill="outline">Open trip chat</ion-button>
+    <br>
+    <h6>Available places: <ion-badge color="danger"> {{trip.availablePlaces}} </ion-badge></h6>
+
+    <br>
+    <h6>Booked by:</h6>
+
+    <ion-list *ngFor="let bookedUser of bookedUsers">
+      <ion-item>
+        <ion-label>{{bookedUser.name}}</ion-label>
+      </ion-item>
+    </ion-list>
+      
+
+</ion-content>

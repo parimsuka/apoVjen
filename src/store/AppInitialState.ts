@@ -40,5 +40,10 @@ export const AppInitialState: AppState = {
         error: null,
         isChangingProfilePic: false,
         isProfilePicChanged: false
+    },
+    bookTrip: {
+        error: null,
+        isBooking: false,
+        isBooked: false
     }
 }

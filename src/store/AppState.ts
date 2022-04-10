@@ -1,3 +1,4 @@
+import { BookState } from "./book/BookState";
 import { ChangePasswordState } from "./changePassword/ChangePasswordState";
 import { ChangeProfilePicState } from "./changeProfilePic/ChangeProfilePicState";
 import { CreateTripState } from "./createTrip/CreateTrip";
@@ -16,4 +17,5 @@ export interface AppState {
     editProfile: EditProfileState;
     changePassword: ChangePasswordState;
     changeProfilePic: ChangeProfilePicState;
+    bookTrip: BookState;
 }
