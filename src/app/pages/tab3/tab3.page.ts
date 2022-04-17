@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { ChangePasswordFormComponent } from 'src/app/components/change-password-form/change-password-form.component';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { AppState } from 'src/store/AppState';
 import { changeProfilePic } from 'src/store/changeProfilePic/changeProfilePic.actions';
@@ -19,7 +21,8 @@ export class Tab3Page {
   changeProfilePicStateSubscription: Subscription;
   userName: string;
 
-  constructor(private router: Router, private store: Store<AppState>, private backEndService: BackendService) {
+  constructor(private router: Router, private store: Store<AppState>, private backEndService: BackendService,
+              public modalController: ModalController) {
 
   }
 
@@ -80,4 +83,12 @@ export class Tab3Page {
       this.userName = user.name;
     });
   }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ChangePasswordFormComponent
+    });
+    return await modal.present();
+  }
 }
+

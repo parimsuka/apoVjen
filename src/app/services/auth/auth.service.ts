@@ -81,13 +81,32 @@ export class AuthService {
       });
     }
 
-    changePassword(password: {password: string}) {
-      const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    changePassword(password: {currentPassword: string, newPassword: string}) {
+      const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')).user;
       return new Observable<void>(observer => {
         setTimeout(() => {
-          this.backEndService.changeUserPassword(loggedInUserID, password).subscribe();
-            observer.next();
-            observer.complete();
+          const credential = firebase.default
+                                      .auth
+                                      .EmailAuthProvider
+                                      .credential(loggedInUser.email, password.currentPassword);
+
+            console.log('current pass', password.currentPassword, 'pass', password.newPassword);
+            firebase.default.auth().currentUser.reauthenticateWithCredential(credential).then(cred => {
+                  this.backEndService.changeUserPassword(loggedInUser.id, password).toPromise().then(() => {
+                    this.signOut().toPromise().then(() => {
+                      this.login(loggedInUser.email, password.newPassword).toPromise().then(() => {
+                        console.log('changed successfully');
+                        observer.next();
+                        observer.complete();
+                      })
+                    })
+                  });
+              }
+            ).catch(error => {
+              console.log('error', error);
+              observer.error(error);
+              observer.complete();
+            });
           }, 3000);
         })
     }
