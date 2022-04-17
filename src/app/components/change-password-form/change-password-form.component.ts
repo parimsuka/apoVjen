@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { modalController } from '@ionic/core';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/store/AppState';
@@ -21,13 +21,17 @@ export class ChangePasswordFormComponent implements OnInit {
 
   ishidden = false;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>, private toastController: ToastController,
+            public modalController: ModalController) {
+
+  }
 
   ngOnInit() {
     this.createForm();
     
     this.changePasswordStateSubscription = this.store.select('changePassword').subscribe(changePasswordState => {
       this.onPasswordChanged(changePasswordState);
+      this.onError(changePasswordState);
 
       this.toggleLoading(changePasswordState);
     })
@@ -38,7 +42,10 @@ export class ChangePasswordFormComponent implements OnInit {
   }
 
   close() {
-    modalController.dismiss();
+    this.modalController.dismiss({
+      'dismissed': true
+    }).then(() => console.log('closed'))
+    .catch(error => console.log('looool'));
   }
 
   ngOnDestroy() {
@@ -63,11 +70,25 @@ export class ChangePasswordFormComponent implements OnInit {
     }
   }
 
+  private onError(changePasswordState: ChangePasswordState) {
+    if(changePasswordState.error) {
+      console.log('here');
+      this.toastController.create({
+        message: changePasswordState.error.code,
+        duration: 2000,
+        header: 'Could not change password'
+      }).then(toast => toast.present().then(() => {
+        this.close();
+      }));
+    }
+  }
+
   changePassword() {
     this.changePasswordForm.getForm().markAllAsTouched();
 
     if (this.changePasswordForm.getForm().valid) {
-      this.store.dispatch(changePassword({password: this.changePasswordForm.getForm().get('password').value}));
+      this.store.dispatch(changePassword({currentPassword: this.changePasswordForm.getForm().get('currentPassword').value,
+                              newPassword: this.changePasswordForm.getForm().get('password').value}));
     }
   }
 

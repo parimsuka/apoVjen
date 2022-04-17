@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Trip Details</ion-title>
-    <app-book-button slot="end" [trip]="trip"></app-book-button>
+    <app-book-button slot="end" [trip]="trip" [booked]="showBookButton"></app-book-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-button fill="outline" color="danger" (click)="deleteTrip()" *ngIf="editable">Delete trip</ion-button>
   <ion-item id="timeAndOwnerOfTrip">
     <ion-text>Owner of the trip: </ion-text>
     <ion-chip slot="">
@@ -31,15 +32,15 @@
 
     <br>
 
-    <ion-button expand="block" fill="outline">Open trip chat</ion-button>
+    <ion-button expand="block" fill="outline" (click)="goToChatPage()">Open trip chat</ion-button>
     <br>
     <h6>Available places: <ion-badge color="danger"> {{trip.availablePlaces}} </ion-badge></h6>
 
     <br>
     <h6>Booked by:</h6>
 
-    <ion-list *ngFor="let bookedUser of bookedUsers">
-      <ion-item>
+    <ion-list>
+      <ion-item *ngFor="let bookedUser of bookedUsers">
         <ion-label>{{bookedUser.name}}</ion-label>
       </ion-item>
     </ion-list>

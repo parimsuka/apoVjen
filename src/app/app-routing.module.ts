@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'trip',
     loadChildren: () => import('./pages/trip/trip.module').then( m => m.TripPageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   }
 ];
 @NgModule({

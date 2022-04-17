@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { AppInitialState } from "../AppInitialState";
-import { changePassword, changePasswordFail, changePasswordSuccess } from "./changePassword.actions";
+import { changePassword, changePasswordFail, changePasswordResetState, changePasswordSuccess } from "./changePassword.actions";
 import { ChangePasswordState } from "./ChangePasswordState";
 
 const initialState = AppInitialState.changePassword;
@@ -26,6 +26,9 @@ const reducer = createReducer(initialState,
             isChangingPassword: false,
             isPasswordChanged: false
         }
+    }),
+    on(changePasswordResetState, () => {
+        return initialState;
     })
 );
 

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Trip } from 'src/app/model/trip/Trip';
 import { AppState } from 'src/store/AppState';
-import { book } from 'src/store/book/book.actions';
+import { book, bookReset, unbook } from 'src/store/book/book.actions';
 import { BookState } from 'src/store/book/BookState';
 import { hide, show } from 'src/store/loading/loading.actions';
 
@@ -17,14 +17,16 @@ import { hide, show } from 'src/store/loading/loading.actions';
 export class BookButtonComponent implements OnInit {
 
   @Input() trip: Trip;
-
+  @Input() booked: boolean;
   bookTripSubscription: Subscription;
 
   constructor(private store: Store<AppState>, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
+    console.log('trip on booked trip', this.trip);
     this.bookTripSubscription = this.store.select('bookTrip').subscribe(bookTripState => {
       this.onBookedTrip(bookTripState);
+      this.onUnBookedTrip(bookTripState);
 
       this.toggleLoading(bookTripState);
 
@@ -48,23 +50,56 @@ export class BookButtonComponent implements OnInit {
 
   private onBookedTrip(bookTripState: BookState) {
     if(bookTripState.isBooked) {
-      console.log('Booked trip');
-      // this.router.navigate(['/tabs/trip', {tripData: JSON.stringify(this.trip)}]);
+      const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+      this.trip.bookedBy.push(loggedInUserID);
+      this.trip.availablePlaces = this.trip.availablePlaces - 1;
+
+      this.store.dispatch(bookReset());
+
+      this.router.navigate(['/tabs/trip', {tripData: JSON.stringify({...this.trip})}]);
+
+      this.booked = !this.booked;
+    }
+  }
+
+  private onUnBookedTrip(bookTripState: BookState) {
+    if(bookTripState.isUnBooked) {
+      const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+      this.trip.bookedBy = this.trip.bookedBy.filter(id => id !== loggedInUserID);
+      this.trip.availablePlaces = this.trip.availablePlaces + 1;
+
+      this.store.dispatch(bookReset());
+
+      this.router.navigate(['/tabs/trip', {tripData: JSON.stringify({...this.trip})}]);
+
+      this.booked = !this.booked;
     }
   }
 
   bookTrip() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
-    if (!this.trip.bookedBy.includes(loggedInUserID)) {
+    if (this.trip.availablePlaces === 0) {
+      this.toastController.create({
+        message: '',
+        duration: 1000,
+        header: 'No more places available'
+      }).then(toast => toast.present());
+    }
+    else if (this.trip.bookedBy === undefined || !this.trip.bookedBy.includes(loggedInUserID)) {
       this.store.dispatch(book({userID: loggedInUserID, tripID: this.trip.id}));
     } else {
       this.toastController.create({
         message: '',
-        duration: 3000,
+        duration: 1000,
         header: 'User has already booked this trip'
       }).then(toast => toast.present());
     }
     
+  }
+  
+  unbookTrip() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.store.dispatch(unbook({userID: loggedInUserID, tripID: this.trip.id}));
   }
 
   private onError(bookTripState: BookState) {

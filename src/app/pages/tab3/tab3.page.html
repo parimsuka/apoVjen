@@ -8,9 +8,7 @@
     </ion-buttons>
     <ion-title>&nbsp;</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="checkmark-outline"></ion-icon>
-      </ion-button>
+      <app-sign-out-button slot="end"></app-sign-out-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -69,19 +67,13 @@
           </ion-label>
         </ion-item>
 
-        <ion-item button id="open-change-password-modal" detail>
+        <ion-item button (click)="presentModal()" detail>
           <ion-label>
             Change Password
           </ion-label>
         </ion-item>
 
-        <ion-modal trigger="open-change-password-modal">
-          <ng-template>
-            <ion-content>
-              <app-change-password-form></app-change-password-form>
-            </ion-content>
-          </ng-template>
-        </ion-modal>
+
       </div>
     </div>
   </ion-content>

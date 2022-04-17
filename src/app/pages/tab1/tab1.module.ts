@@ -8,7 +8,6 @@ import { ExploreContainerComponentModule } from '../../explore-container/explore
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { TripsComponent } from '../../components/trips/trips.component';
 import { TripComponent } from '../../components/trip/trip.component';
-import { SignOutButtonComponent } from '../../components/sign-out-button/sign-out-button.component';
 
 @NgModule({
   imports: [
@@ -21,7 +20,6 @@ import { SignOutButtonComponent } from '../../components/sign-out-button/sign-ou
   declarations: [
     Tab1Page,
     TripComponent,
-    TripsComponent,
-    SignOutButtonComponent]
+    TripsComponent]
 })
 export class Tab1PageModule {}

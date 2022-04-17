@@ -22,12 +22,8 @@ export class Tab1Page {
 
   }
 
-  onload() {
-
-  }
-
   ngAfterViewInit() {
-    //this.generateTrips();
+    
   }
 
   generateTrips() {

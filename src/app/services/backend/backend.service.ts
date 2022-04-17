@@ -22,7 +22,7 @@ export class BackendService {
   }
 
   deleteTrip(id: string) {
-    return this.httpClient.delete<Trip>(this.backEndURL + '/create-trip/' + id, null);
+    return this.httpClient.delete<Trip>(this.backEndURL + '/create-trip/' + id, {observe: 'body', responseType: 'text' as 'json'});
   }
 
   editProfile(id: string, userRegister: UserRegister) {
@@ -37,7 +37,7 @@ export class BackendService {
     return this.httpClient.post(this.backEndURL + '/register', userRegister, {observe: 'body', responseType: 'text' as 'json'});
   }
 
-  changeUserPassword(id:string, password: {password: string}) {
+  changeUserPassword(id:string, password: {currentPassword: string, newPassword: string}) {
     return this.httpClient.patch(this.backEndURL + '/users/changePassword/' + id, password, {observe: 'body', responseType: 'json'});
   }
 
@@ -53,7 +53,10 @@ export class BackendService {
 
   bookTrip(data: {userID: string, tripID: string}) {
     return this.httpClient.post(this.backEndURL + '/book-trip', data, {observe: 'body', responseType: 'text' as 'json'});
+  }
 
+  unbookTrip(data: {userID: string, tripID: string}) {
+    return this.httpClient.delete(this.backEndURL + '/book-trip?tripID=' + data.tripID + '&userID=' + data.userID, {observe: 'body', responseType: 'text' as 'json'});
   }
 
 }

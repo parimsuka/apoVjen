@@ -1,1 +1,2 @@
-<ion-button size="" fill="outline" (click)="bookTrip()">Book</ion-button>
+<ion-button size="" fill="outline" (click)="bookTrip()" *ngIf="booked">Book</ion-button>
+<ion-button fill="outline" color="danger" (click)="unbookTrip()" *ngIf="!booked">Unbook</ion-button>
