@@ -4,10 +4,10 @@ import { IonicModule } from '@ionic/angular';
 import { StoreModule } from '@ngrx/store';
 import { createTripReducer } from 'src/store/createTrip/createTrip.reducers';
 import { loadingReducer } from 'src/store/loading/loading.reducers';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { Tab2Page } from './tab2.page';
+import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
 
 describe('Tab2Page', () => {
   let component: Tab2Page;
