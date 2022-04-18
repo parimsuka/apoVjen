@@ -19,11 +19,12 @@ export class BookButtonComponent implements OnInit {
   @Input() trip: Trip;
   @Input() booked: boolean;
   bookTripSubscription: Subscription;
+  disabled: boolean;
 
   constructor(private store: Store<AppState>, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
-    console.log('trip on booked trip', this.trip);
+    this.isTripOwner();
     this.bookTripSubscription = this.store.select('bookTrip').subscribe(bookTripState => {
       this.onBookedTrip(bookTripState);
       this.onUnBookedTrip(bookTripState);
@@ -38,6 +39,12 @@ export class BookButtonComponent implements OnInit {
     if(this.bookTripSubscription) {
       this.bookTripSubscription.unsubscribe();
     }
+  }
+
+  isTripOwner() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.disabled = false;
+    // TODO
   }
 
   private toggleLoading(bookTripState: BookState) {

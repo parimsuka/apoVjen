@@ -48,7 +48,8 @@ describe('Create trip effects', () => {
                 username: 'anyName',
                 from: 'anyCity',
                 to: 'anotherCity',
-                availablePlaces: 'anyNumber'}
+                availablePlaces: 42,
+                bookedBy: []}
             }));
 
         effects.createTrip$.subscribe(newAction => {
