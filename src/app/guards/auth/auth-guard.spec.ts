@@ -41,6 +41,7 @@ describe('AuthGuard', () => {
   });
 
   it('should send not logged in users to the login page', () => {
+    localStorage.removeItem('loggedInUser');
     spyOn(router, 'navigateByUrl');
 
     guard.canLoad().subscribe(() => {
