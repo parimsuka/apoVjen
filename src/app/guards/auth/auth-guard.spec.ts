@@ -34,6 +34,7 @@ describe('AuthGuard', () => {
   });
 
   it('should not allow to access page if user is not logged in', () => {
+    localStorage.removeItem('loggedInUser');
     guard.canLoad().subscribe(isAllowed => {
       expect(isAllowed).toBeFalsy();
     })

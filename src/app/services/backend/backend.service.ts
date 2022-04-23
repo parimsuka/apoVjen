@@ -48,7 +48,13 @@ export class BackendService {
 
   getProfilePictureURL() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
-    return firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').getDownloadURL();
+    if(loggedInUserID !== undefined) {
+      return firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').getDownloadURL();
+    } else {
+      return new Promise<void>((resolve, reject) => {
+        
+      });
+    }
   }
 
   bookTrip(data: {userID: string, tripID: string}) {

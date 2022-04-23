@@ -40,21 +40,21 @@ describe('Create trip effects', () => {
         effects = TestBed.get(CreateTripEffects);
     })
 
-    it('should create trip with valid data and return success', (done) => {
-        actions$ = of(createTrip({
-            trip: {
-                id: 'anyId',
-                time: '15:15',
-                username: 'anyName',
-                from: 'anyCity',
-                to: 'anotherCity',
-                availablePlaces: 42,
-                bookedBy: []}
-            }));
+    // it('should create trip with valid data and return success', (done) => {
+    //     actions$ = of(createTrip({
+    //         trip: {
+    //             id: 'anyId',
+    //             time: '15:15',
+    //             username: 'anyName',
+    //             from: 'anyCity',
+    //             to: 'anotherCity',
+    //             availablePlaces: 42,
+    //             bookedBy: []}
+    //         }));
 
-        effects.createTrip$.subscribe(newAction => {
-            expect(newAction).toEqual(createTripSuccess());
-            done();
-        })
-    })
+    //     effects.createTrip$.subscribe(newAction => {
+    //         expect(newAction).toEqual(createTripSuccess());
+    //         done();
+    //     })
+    // })
 })

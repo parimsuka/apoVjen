@@ -17,7 +17,5 @@ describe('TripComponent', () => {
     component = fixture.componentInstance;
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 });

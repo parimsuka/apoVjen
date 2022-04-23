@@ -18,7 +18,5 @@ describe('BookButtonComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 });

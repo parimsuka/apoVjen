@@ -18,7 +18,5 @@ describe('TripsComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 });

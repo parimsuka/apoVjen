@@ -23,7 +23,7 @@ const reducer = createReducer(initialState,
     on(registerFail, (state, action) => {
         return {
             ...state,
-            error: action.error.error,
+            error: action.error,
             isRegistered: false,
             isRegistering: false
         }
