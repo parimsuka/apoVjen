@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('../trip/trip.module').then( m => m.TripPageModule)
       },
       {
+        path: 'display',
+        loadChildren: () => import('../display/display.module').then( m => m.DisplayPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

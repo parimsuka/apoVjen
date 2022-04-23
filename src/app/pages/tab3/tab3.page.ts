@@ -77,6 +77,10 @@ export class Tab3Page {
     this.router.navigateByUrl('tabs/edit-profile');
   }
 
+  goToDisplayPage() {
+    this.router.navigateByUrl('tabs/display');
+  }
+
   private getLoggedInUserName() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
     this.backEndService.getUser(loggedInUserID).subscribe(user => {
