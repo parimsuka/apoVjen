@@ -142,7 +142,7 @@ describe('RegisterPage', () => {
     component.registerForm.getForm().get('password').setValue('anyPassword');
     component.registerForm.getForm().get('repeatPassword').setValue('anyPassword');
     component.registerForm.getForm().get('phone').setValue('anyPhone');
-    component.registerForm.getForm().get('address').get('street').setValue('anyStreet');
+    component.registerForm.getForm().get('address').get('address').setValue('anyStreet');
     component.registerForm.getForm().get('address').get('number').setValue('anyNumber');
     component.registerForm.getForm().get('address').get('zip').setValue('anyZip');
     component.registerForm.getForm().get('address').get('state').setValue('anyState');

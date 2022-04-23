@@ -28,7 +28,7 @@ describe('RegisterPageForm', () => {
     })
 
     it('should empty street be invalid', () => {
-        expect(form.get('address').get('street').valid).toBeFalsy();
+        expect(form.get('address').get('address').valid).toBeFalsy();
     })
 
     it('should empty number be invalid', () => {
@@ -72,7 +72,7 @@ describe('RegisterPageForm', () => {
         form.get('password').setValue('anyPassword');
         form.get('repeatPassword').setValue('anyPassword');
         form.get('phone').setValue('anyPhone');
-        form.get('address').get('street').setValue('anyStreet');
+        form.get('address').get('address').setValue('anyStreet');
         form.get('address').get('number').setValue('anyNumber');
         form.get('address').get('zip').setValue('anyZip');
         form.get('address').get('state').setValue('anyState');
