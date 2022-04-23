@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs" text=""></ion-back-button>
+    </ion-buttons>
     <ion-title>Trip Details</ion-title>
     <app-book-button slot="end" [trip]="trip" [booked]="showBookButton"></app-book-button>
   </ion-toolbar>

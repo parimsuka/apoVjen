@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="primary">
+      <ion-button color="primary" href="tabs">
         <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-        Favorites
+        Home
       </ion-button>
     </ion-buttons>
     <ion-title>&nbsp;</ion-title>
@@ -57,11 +57,11 @@
         <h3 class="Settings">Settings</h3>
         <ion-item button (click)="buttonClick()" detail>
           <ion-label>
-            Manage trips
+            Change language
           </ion-label>
         </ion-item>
 
-        <ion-item button (click)="buttonClick()" detail>
+        <ion-item button (click)="goToDisplayPage()" detail>
           <ion-label>
             Display
           </ion-label>
@@ -69,7 +69,7 @@
 
         <ion-item button (click)="presentModal()" detail>
           <ion-label>
-            Change Password
+            Change password
           </ion-label>
         </ion-item>
 

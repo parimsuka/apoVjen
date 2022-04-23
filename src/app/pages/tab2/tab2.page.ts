@@ -19,6 +19,8 @@ import { CreateTripPageForm } from './form/createTrip.form';
 })
 export class Tab2Page {
 
+  cities: string[] = ['Prishtina', 'Prizren', 'Peja', 'Gjilan', 'Gjakova', 'Ferizaj', 'Mitrovica'];
+
   showPicker: boolean = false;
   dateValue: string;
   formattedDate: string;
