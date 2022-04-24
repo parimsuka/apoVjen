@@ -10,6 +10,9 @@ import { ChangePasswordFormComponent } from 'src/app/components/change-password-
 import { ErrorMessageModule } from 'src/app/components/error-message/error-message.module';
 import { SignOutButtonComponent } from 'src/app/components/sign-out-button/sign-out-button.component';
 import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { createTranslateLoader } from 'src/app/app.module';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -20,7 +23,14 @@ import { ExploreContainerComponentModule } from 'src/app/explore-container/explo
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
     ReactiveFormsModule,
-    ErrorMessageModule
+    ErrorMessageModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   declarations: [
     Tab3Page,

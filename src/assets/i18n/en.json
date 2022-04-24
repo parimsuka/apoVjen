@@ -1,0 +1,78 @@
+{
+    "tabs": {
+        "tab1": "Trips",
+        "tab2": "Create trip",
+        "tab3": "Profile"
+    },
+    "tab1": {
+        "title": "Home",
+        "myTrips": "My trips"
+    },
+    "tab2": {
+        "title": "Create a new trip",
+        "createButton": "Create Trip",
+        "form": "Form",
+        "from": "From",
+        "to": "To",
+        "pickDate": "Pick a date",
+        "dismiss": "Dismiss",
+        "select": "Select",
+        "maxAvailablePlaces": "Max Available Places"
+    },
+    "tab3": {
+        "backButton": "Home",
+        "editProfile": "Edit profile",
+        "myTrips": "My trips",
+        "settings": "Settings",
+        "changeLanguage": "Change language",
+        "display": "Display",
+        "changePassword": "Change password",
+        "signOut": "Sign out"
+    },
+    "trip": {
+        "title": "Trip Details",
+        "departure": "Departure",
+        "availablePlaces": "Available places",
+        "book": "Book",
+        "unbook": "Unbook",
+        "delete": "Delete trip",
+        "owner": "Owner of the trip",
+        "openChat": "Open trip chat",
+        "bookedBy": "Booked by",
+        "chatTitle": "Trip Chat"
+    },
+    "changePassword": {
+        "title": "Change Password",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "cancel": "Cancel"
+    },
+    "display": {
+        "title": "Display settings",
+        "darkTheme": "Dark theme"
+    },
+    "registerForm": {
+        "registerTitle": "Register",
+        "editProfileTitle": "Edit profile",
+        "contactTitle": "Contact",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "phoneNumber": "Phone number",
+        "addressTitle": "Addres information",
+        "street": "Street",
+        "number": "Number",
+        "zipCode": "Zip code",
+        "state": "State",
+        "city": "City",
+        "save": "Save"
+    },
+    "changeLanguage": {
+        "title": "ChangeLanguage",
+        "language": "Language",
+        "languageChangePlaceholder": "English",
+        "invite": "Now you have selected {{lang}}"
+    }
+}

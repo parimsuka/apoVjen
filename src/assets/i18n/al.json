@@ -1,0 +1,78 @@
+{
+    "tabs": {
+        "tab1": "Udhetimet",
+        "tab2": "Krijo udhetimin",
+        "tab3": "Profili"
+    },
+    "tab1": {
+        "title": "Home",
+        "myTrips": "Udhetimet e mia"
+    },
+    "tab2": {
+        "title": "Krijo nje udhetim te ri",
+        "createButton": "Krijo udhetimin",
+        "form": "Forma",
+        "from": "Prej",
+        "to": "Ne",
+        "pickDate": "Zgjedh daten",
+        "dismiss": "Injoro",
+        "select": "Zgjedh",
+        "maxAvailablePlaces": "Vende te lira"
+    },
+    "tab3": {
+        "backButton": "Home",
+        "editProfile": "Edito profilin",
+        "myTrips": "Udhetimet e mia",
+        "settings": "Cilesimet",
+        "changeLanguage": "Nderro gjuhen",
+        "display": "Ekrani",
+        "changePassword": "Nderro fjalekalimin",
+        "signOut": "Dilni"
+    },
+    "trip": {
+        "title": "Detajet e udhetimit",
+        "departure": "Nisja",
+        "availablePlaces": "Vende te lira",
+        "book": "Rezervo",
+        "unbook": "Fshij rezervimin",
+        "delete": "Fshij udhetimin",
+        "owner": "Krijuesi i udhetimit",
+        "openChat": "Hap chatin e udhetimit",
+        "bookedBy": "E rezervuar nga",
+        "chatTitle": "Chati i udhetimit"
+    },
+    "changePassword": {
+        "title": "Nderro Fjalekalimin",
+        "currentPassword": "Fjalekalimi aktual",
+        "newPassword": "Fjalekalimi i ri",
+        "confirmPassword": "Konfirmo Fjalekalimin",
+        "cancel": "Anulo"
+    },
+    "display": {
+        "title": "Cilesimet e ekranit",
+        "darkTheme": "Dark theme"
+    },
+    "registerForm": {
+        "registerTitle": "Regjistrohu",
+        "editProfileTitle": "Edito profilin",
+        "contactTitle": "Kontakt",
+        "name": "Emri",
+        "email": "Emaili",
+        "password": "Fjalekalimi",
+        "confirmPassword": "Konfirmo Fjalekalimin",
+        "phoneNumber": "Numri i telefonit",
+        "addressTitle": "Informata per adresen",
+        "street": "Rruga",
+        "number": "Numri",
+        "zipCode": "Kodi postal",
+        "state": "Shteti",
+        "city": "Qyteti",
+        "save": "Ruaj"
+    },
+    "changeLanguage": {
+        "title": "Nderro Gjuhen",
+        "language": "Gjuha",
+        "languageChangePlaceholder": "Albanian",
+        "invite": "Tani keni zgjedhur gjuhen {{lang}}"
+    }
+}

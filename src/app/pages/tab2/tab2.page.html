@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Create a new trip
+      {{ 'tab2.title' | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,12 +10,12 @@
   <form [formGroup]="createTripForm.getForm()">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Form</ion-card-title>
+        <ion-card-title>{{ 'tab2.form' | translate }}</ion-card-title>
       </ion-card-header>
     
       <ion-card-content>
         <ion-item>
-          <ion-label>From</ion-label>
+          <ion-label>{{ 'tab2.from' | translate }}</ion-label>
           <ion-select class="custom-options" interface="popover" formControlName="from">
             <div *ngFor="let city of cities">
               <ion-select-option value="{{city}}" class="brown-option">{{city}}</ion-select-option>
@@ -26,7 +26,7 @@
         <app-error-message message="The departure city and destination must be different" [field]="createTripForm.getForm().get('from')" error="isntMatching"></app-error-message>
 
         <ion-item>
-          <ion-label>To</ion-label>
+          <ion-label>{{ 'tab2.to' | translate }}</ion-label>
           <ion-select class="custom-options" interface="popover" formControlName="to">
             <div *ngFor="let city of cities">
               <ion-select-option value="{{city}}" class="brown-option">{{city}}</ion-select-option>
@@ -38,7 +38,7 @@
 
         <ion-item id="open-modal">
           <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>Pick a date</ion-label>
+          <ion-label>{{ 'tab2.pickDate' | translate }}</ion-label>
           <ion-text slot="end">{{formattedDate}}</ion-text>
         </ion-item>
         <app-error-message message="Picking a date is mandatory" [field]="createTripForm.getForm().get('time')" error="required"></app-error-message>
@@ -48,8 +48,8 @@
             <ion-content>
               <ion-datetime formControlName="time" #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
                 <ion-buttons slot="buttons">
-                  <ion-button (click)="close()">Dismiss</ion-button>
-                  <ion-button (click)="select()" color="primary">Select</ion-button>
+                  <ion-button (click)="close()">{{ 'tab2.dismiss' | translate }}</ion-button>
+                  <ion-button (click)="select()" color="primary">{{ 'tab2.select' | translate }}</ion-button>
                 </ion-buttons>
               </ion-datetime>
             </ion-content>
@@ -57,7 +57,7 @@
         </ion-modal>
 
         <ion-item>
-          <ion-label position="floating">Max Available Places</ion-label>
+          <ion-label position="floating">{{ 'tab2.maxAvailablePlaces' | translate }}</ion-label>
           <ion-input type="number" value="" formControlName="availablePlaces"></ion-input>
         </ion-item>
         <app-error-message message="Max available places is mandatory" [field]="createTripForm.getForm().get('availablePlaces')" error="required"></app-error-message>
@@ -65,6 +65,6 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-button color="light" size="full" (click)="createTrip()">Create Trip</ion-button>
+    <ion-button color="light" size="full" (click)="createTrip()">{{ 'tab2.createButton' | translate }}</ion-button>
   </form>
 </ion-content>

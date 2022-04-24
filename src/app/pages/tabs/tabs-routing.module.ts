@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('../display/display.module').then( m => m.DisplayPageModule)
       },
       {
+        path: 'change-language',
+        loadChildren: () => import('../change-language/change-language.module').then( m => m.ChangeLanguagePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

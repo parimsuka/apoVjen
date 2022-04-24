@@ -3,16 +3,16 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Trip Details</ion-title>
+    <ion-title>{{ 'trip.title' | translate }}</ion-title>
     <app-book-button slot="end" [trip]="trip" [booked]="showBookButton"></app-book-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-button fill="outline" color="danger" (click)="deleteTrip()" *ngIf="editable">Delete trip</ion-button>
+  <ion-button fill="outline" color="danger" (click)="deleteTrip()" *ngIf="editable">{{ 'trip.delete' | translate }}</ion-button>
   <ion-item id="timeAndOwnerOfTrip">
-    <ion-text>Owner of the trip: </ion-text>
+    <ion-text>{{ 'trip.owner' | translate }}: </ion-text>
     <ion-chip slot="">
       <!-- <ion-avatar>
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
@@ -35,12 +35,12 @@
 
     <br>
 
-    <ion-button expand="block" fill="outline" (click)="goToChatPage()">Open trip chat</ion-button>
+    <ion-button expand="block" fill="outline" (click)="goToChatPage()">{{ 'trip.openChat' | translate }}</ion-button>
     <br>
-    <h6>Available places: <ion-badge color="danger"> {{trip.availablePlaces}} </ion-badge></h6>
+    <h6>{{ 'trip.availablePlaces' | translate }}: <ion-badge color="danger"> {{trip.availablePlaces}} </ion-badge></h6>
 
     <br>
-    <h6>Booked by:</h6>
+    <h6>{{ 'trip.bookedBy' | translate }}:</h6>
 
     <ion-list>
       <ion-item *ngFor="let bookedUser of bookedUsers">
