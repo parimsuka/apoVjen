@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/tab3" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Display settings</ion-title>
+    <ion-title>{{ 'display.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
-    <ion-label>Dark theme</ion-label>
+    <ion-label>{{ 'display.darkTheme' | translate }}</ion-label>
     <ion-toggle (ionChange)="toggleDarkTheme($event)"></ion-toggle>
   </ion-item>
 </ion-content>

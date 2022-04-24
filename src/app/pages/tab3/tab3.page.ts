@@ -81,6 +81,10 @@ export class Tab3Page {
     this.router.navigateByUrl('tabs/display');
   }
 
+  goToChangeLanguagePage() {
+    this.router.navigateByUrl('tabs/change-language');
+  }
+
   private getLoggedInUserName() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
     this.backEndService.getUser(loggedInUserID).subscribe(user => {

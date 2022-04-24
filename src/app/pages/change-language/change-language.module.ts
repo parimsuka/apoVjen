@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DisplayPageRoutingModule } from './display-routing.module';
+import { ChangeLanguagePageRoutingModule } from './change-language-routing.module';
 
-import { DisplayPage } from './display.page';
+import { ChangeLanguagePage } from './change-language.page';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { createTranslateLoader } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    DisplayPageRoutingModule,
+    ChangeLanguagePageRoutingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -25,6 +25,6 @@ import { HttpClient } from '@angular/common/http';
       }
     })
   ],
-  declarations: [DisplayPage]
+  declarations: [ChangeLanguagePage]
 })
-export class DisplayPageModule {}
+export class ChangeLanguagePageModule {}

@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'display',
     loadChildren: () => import('./pages/display/display.module').then( m => m.DisplayPageModule)
+  },
+  {
+    path: 'change-language',
+    loadChildren: () => import('./pages/change-language/change-language.module').then( m => m.ChangeLanguagePageModule)
   }
 ];
 @NgModule({

@@ -12,9 +12,16 @@ import { LoadingComponent } from './components/loading/loading.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -30,7 +37,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AngularFireAuthModule,
     AngularFirestoreModule,
     ...AppStoreModule,
-    StoreDevtoolsModule.instrument({maxAge: 25})],
+    StoreDevtoolsModule.instrument({maxAge: 25}),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
