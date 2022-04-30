@@ -57,6 +57,9 @@ export class BookButtonComponent implements OnInit {
 
   private onBookedTrip(bookTripState: BookState) {
     if(bookTripState.isBooked) {
+      if (this.trip.bookedBy === undefined) {
+        this.trip.bookedBy = [];
+      }
       const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
       this.trip.bookedBy.push(loggedInUserID);
       this.trip.availablePlaces = this.trip.availablePlaces - 1;
