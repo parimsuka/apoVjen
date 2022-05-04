@@ -18,6 +18,8 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
         
+      - run: export CHROME_BIN='/usr/bin/chromium'
+
       - run: sudo rm -rf node_modules
 
       - run: npm install
