@@ -7,7 +7,7 @@ defaults: &defaults
   docker:
     - image: circleci/node:16.10
       environment:
-        - CHROME_BIN: /usr/bin/google-chrome
+        - CHROME_BIN: /usr/bin/chromium
 
 jobs:
   test:
