@@ -18,7 +18,7 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      - run: sudo snap install chromium
+      - run: sudo apt install chromium-browser
         
       - run: export CHROME_BIN='/usr/bin/chromium'
 
