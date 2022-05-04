@@ -6,8 +6,6 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/node:16.10
-      environment:
-        - CHROME_BIN: /usr/bin/chromium
 
 jobs:
   test:
