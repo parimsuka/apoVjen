@@ -18,9 +18,9 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      # - run: sudo apt-get update
+      - run: sudo apt-get update
 
-      # - run: sudo apt install chromium
+      - run: sudo apt install chromium
         
       # - run: export CHROME_BIN='/usr/bin/chromium'
 
