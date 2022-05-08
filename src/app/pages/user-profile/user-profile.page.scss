@@ -1,0 +1,75 @@
+ion-content {
+    --background: url(http://placekitten.com/g/200/300) no-repeat top center/cover fixed, #fff;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+ion-toolbar {
+    --background: transparent;
+}
+
+.card {
+    margin: 0 auto;
+
+    .header {
+        position: relative;
+        height: 200px;
+
+        ion-avatar {
+            width: 160px;
+            height: 160px;
+            position: relative;
+            margin: 0 auto;
+
+            img {
+                display: block;
+                border-radius: 50%;
+                position: absolute;
+                bottom: calc(-1*(80px + 4px));
+                border: 8px solid #9Dc912;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+.card-body {
+    background-color: darkslategray;
+    padding: 30px;
+    // height: calc(100vh - (200px + 0px));
+    overflow: hidden;
+
+    .user-meta {
+        padding-top: 20px;
+
+        .playername {
+            font-size: 24px;
+            font-weight: 600;
+            color: #303940;
+        }
+    }
+}
+
+
+body{background: #eee}
+.date{font-size: 11px}
+.comment-text{
+    font-size: 14px;
+    padding-left: 30px;
+    font-weight: bold;}
+.shadow-none{box-shadow: none}
+.name{color: #007bff}
+.cursor:hover{color: blue}
+.cursor{cursor: pointer}
+.textarea{resize: none}
+.grid {
+    margin-bottom: -15px;
+}
+
+.reviewerProfilePic {
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 40px !important;  //any size
+    max-height: 40px !important; //any size 
+}

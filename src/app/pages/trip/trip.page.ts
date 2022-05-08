@@ -15,6 +15,7 @@ export class TripPage implements OnInit {
   editable: boolean;
   showBookButton: boolean;
   trip: Trip;
+  username: string;
   bookedUsers: UserRegister[] = [];
 
   constructor(private route: ActivatedRoute, private backEndService: BackendService, private router: Router,
@@ -26,7 +27,7 @@ export class TripPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('trip on trip page', this.trip);
+    this.getUserNameFromId();
     this.isTripEditable();
     this.shouldShowBookButton();
   }
@@ -47,6 +48,12 @@ export class TripPage implements OnInit {
       this.bookedUsers = [];
       bookedBy.forEach(userID => this.getUser(userID));
     }
+  }
+
+  getUserNameFromId() {
+    this.backEndService.getUser(this.trip.username).subscribe(user => {
+      this.username = user.name;
+    });
   }
 
   goToChatPage() {
@@ -85,6 +92,10 @@ export class TripPage implements OnInit {
   deleteTrip() {
     this.backEndService.deleteTrip(this.trip.id).subscribe();
     this.router.navigate(['tabs/tab1']);
+  }
+
+  goToUserProfile() {
+    this.router.navigate(['/user-profile', {userID: JSON.stringify(this.trip.username)}]);
   }
 
   private getUser(id: string) {

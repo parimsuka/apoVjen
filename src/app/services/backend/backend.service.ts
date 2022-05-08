@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Trip } from 'src/app/model/trip/Trip';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import * as firebase from '../../../../node_modules/firebase/compat';
+import { Review } from 'src/app/model/review/Review';
 
 @Injectable({
   providedIn: 'root'
@@ -46,15 +47,10 @@ export class BackendService {
     return this.httpClient.post(this.backEndURL + '/storage/' + id, file, {observe: 'body', responseType: 'json'});
   }
 
-  getProfilePictureURL() {
-    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
-    if(loggedInUserID !== undefined) {
-      return firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').getDownloadURL();
-    } else {
-      return new Promise<void>((resolve, reject) => {
-        
-      });
-    }
+  getProfilePictureURL(loggedInUserID: string) {
+    return firebase.default.storage().ref('/users/' + loggedInUserID + '/profile.jpg').getDownloadURL().catch(() => {
+      return firebase.default.storage().ref('/users/default/profile.png').getDownloadURL();
+    });
   }
 
   bookTrip(data: {userID: string, tripID: string}) {
@@ -63,6 +59,11 @@ export class BackendService {
 
   unbookTrip(data: {userID: string, tripID: string}) {
     return this.httpClient.delete(this.backEndURL + '/book-trip?tripID=' + data.tripID + '&userID=' + data.userID, {observe: 'body', responseType: 'text' as 'json'});
+  }
+
+  getReviewsByID(id: string) {
+    console.log(this.httpClient.get<Review[]>(this.backEndURL + '/review?id=' + id));
+    return this.httpClient.get<Review[]>(this.backEndURL + '/review?id=' + id);
   }
 
 }

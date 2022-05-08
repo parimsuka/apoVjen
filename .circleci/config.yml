@@ -22,10 +22,6 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
-        
-      # - run: export CHROME_BIN='/usr/bin/chromium'
-      # - run: export CHROME_BIN='/usr/bin/google-chrome'
-
 
       - run: sudo rm -rf node_modules
 

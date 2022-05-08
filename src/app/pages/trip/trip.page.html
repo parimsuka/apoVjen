@@ -13,11 +13,11 @@
   <ion-button fill="outline" color="danger" (click)="deleteTrip()" *ngIf="editable">{{ 'trip.delete' | translate }}</ion-button>
   <ion-item id="timeAndOwnerOfTrip">
     <ion-text>{{ 'trip.owner' | translate }}: </ion-text>
-    <ion-chip slot="">
+    <ion-chip slot="" (click)="goToUserProfile()">
       <!-- <ion-avatar>
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
       </ion-avatar> -->
-      <ion-label>{{trip.username}}</ion-label>
+      <ion-label>{{username}}</ion-label>
     </ion-chip>
 
   </ion-item>
