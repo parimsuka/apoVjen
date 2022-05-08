@@ -109,9 +109,10 @@ export class Tab2Page {
 
   private addUserNameToForm() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
-    this.backEnd.getUser(loggedInUserID).subscribe(user => {
-      this.createTripForm.addUserName(user.name);
-    });
+    // this.backEnd.getUser(loggedInUserID).subscribe(user => {
+    //   this.createTripForm.addUserName(user.name);
+    // });
+    this.createTripForm.addUserName(loggedInUserID);
   }
 
 }

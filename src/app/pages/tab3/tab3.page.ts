@@ -68,7 +68,8 @@ export class Tab3Page {
   }
 
   getProfilePicture() {
-    this.backEndService.getProfilePictureURL().then(imgURL => {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.backEndService.getProfilePictureURL(loggedInUserID).then(imgURL => {
       this.img = imgURL;
     });
   }

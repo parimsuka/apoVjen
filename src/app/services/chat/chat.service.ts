@@ -91,4 +91,26 @@ export class ChatService {
       })
     );
   }
+
+
+  //Reviews
+  getReviewsByID(id: string) {
+    return this.afs.collection('reviews', ref => ref.where("for", "==", id)).valueChanges();
+  }
+
+  //Comments
+  getCommentsByID(id: string) {
+    return this.afs.collection('comments', ref => ref.where("for", "==", id).orderBy('createdAt')).valueChanges();
+  }
+
+  addComent(forUser: string, from: string, comment: string, img: string, username: string) {
+    return this.afs.collection('comments').add({
+      for: forUser,
+      from: from,
+      comment: comment,
+      img: img,
+      username: username,
+      createdAt: firebase.default.firestore.FieldValue.serverTimestamp()
+    });  
+  }
 }

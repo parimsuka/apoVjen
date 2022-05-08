@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'change-language',
     loadChildren: () => import('./pages/change-language/change-language.module').then( m => m.ChangeLanguagePageModule)
+  },
+  {
+    path: 'user-profile',
+    loadChildren: () => import('./pages/user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   }
 ];
 @NgModule({
