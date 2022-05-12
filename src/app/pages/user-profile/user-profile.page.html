@@ -64,8 +64,9 @@
           <ion-icon size="small" slot="end" name="barbell"></ion-icon>
         </ion-range>
       </ion-item>
-    
 
+      <ion-button (click)="presentReviewModal()">Add review</ion-button>
+    
       <br>
       <h6>Reviews:</h6>
 
@@ -104,9 +105,22 @@
 
       <br><br>
       <div class="bg-light p-2">
+        <p class="writeComment">Write a comment:</p>
         <div class="d-flex flex-row align-items-start">
-          <img class="rounded-circle" src="{{loggedInUserImgURL}}" width="40">
-          <textarea class="form-control ml-1 shadow-none textarea" [(ngModel)]="newComment"></textarea>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2" size-sm>
+                <ion-avatar class="reviewerProfilePic">
+                  <img class="rounded-circle" src="{{loggedInUserImgURL}}" width="40">
+                </ion-avatar>
+              </ion-col>
+              <ion-col>
+                <div>
+                  <textarea class="textarea" [(ngModel)]="newComment"></textarea>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </div>
         <div class="mt-2 text-right">
           <ion-button (click)="addComent()">Post Comment</ion-button>

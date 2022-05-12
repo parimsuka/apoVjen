@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { ReviewFormComponent } from 'src/app/components/review-form/review-form.component';
 import { Comment } from 'src/app/model/comment/Comment';
 import { Review } from 'src/app/model/review/Review';
 import { BackendService } from 'src/app/services/backend/backend.service';
@@ -31,7 +33,8 @@ export class UserProfilePage implements OnInit {
     helpful: 0
   };
 
-  constructor(private route: ActivatedRoute, private backEndService: BackendService, private chatService: ChatService) {
+  constructor(private route: ActivatedRoute, private backEndService: BackendService, private chatService: ChatService,
+              public modalController: ModalController) {
     this.route.params.subscribe(param => {
       this.userID = JSON.parse(param['userID']);
     });
@@ -110,6 +113,14 @@ export class UserProfilePage implements OnInit {
     this.chatService.addComent(this.userID, this.loggedInUserID, this.newComment, this.loggedInUserImgURL, this.loggedInUserName).then(() => {
       this.newComment = '';
     });
+  }
+
+
+  async presentReviewModal() {
+    const modal = await this.modalController.create({
+      component: ReviewFormComponent
+    });
+    return await modal.present();
   }
 
 }

@@ -15,6 +15,8 @@ import { LoginEffects } from "./login/login.effects";
 import { loginReducer } from "./login/login.reducers";
 import { RegisterEffects } from "./register/register.effects";
 import { registerReducer } from "./register/register.reducers";
+import { ReviewEffects } from "./review/review.effects";
+import { reviewReducer } from "./review/review.reducers";
 import { SignOutEffects } from "./signout/signout.effects";
 import { signOutReducer } from "./signout/signout.reducers";
 
@@ -29,6 +31,7 @@ export const AppStoreModule = [
     StoreModule.forFeature("changePassword", changePasswordReducer),
     StoreModule.forFeature("changeProfilePic", changeProfilePicReducer),
     StoreModule.forFeature("bookTrip", bookTripReducer),
+    StoreModule.forFeature("review", reviewReducer),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
         LoginEffects,
@@ -38,6 +41,7 @@ export const AppStoreModule = [
         EditProfileEffects,
         ChangePasswordEffects,
         ChangeProfilePicEffects,
-        BookEffects
+        BookEffects,
+        ReviewEffects
     ])
 ]

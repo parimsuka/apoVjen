@@ -46,5 +46,10 @@ export const AppInitialState: AppState = {
         isBooking: false,
         isBooked: false,
         isUnBooked: false
+    },
+    review: {
+        error: null,
+        isReviewing: false,
+        isReviewed: false
     }
 }

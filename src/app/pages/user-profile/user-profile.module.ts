@@ -10,6 +10,7 @@ import { UserProfilePage } from './user-profile.page';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { createTranslateLoader } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { ReviewFormComponent } from 'src/app/components/review-form/review-form.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,8 @@ import { HttpClient } from '@angular/common/http';
       }
     })
   ],
-  declarations: [UserProfilePage]
+  declarations: [
+    UserProfilePage,
+    ReviewFormComponent]
 })
 export class UserProfilePageModule {}
