@@ -6,6 +6,7 @@ import { EditProfileState } from "./editProfile/EditProfileState";
 import { LoadingState } from "./loading/LoadingState";
 import { LoginState } from "./login/LoginState";
 import { RegisterState } from "./register/RegisterState";
+import { ReviewState } from "./review/ReviewState";
 import { SignOutState } from "./signout/SignOutState";
 
 export interface AppState {
@@ -18,4 +19,5 @@ export interface AppState {
     changePassword: ChangePasswordState;
     changeProfilePic: ChangeProfilePicState;
     bookTrip: BookState;
+    review: ReviewState;
 }

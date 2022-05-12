@@ -66,4 +66,8 @@ export class BackendService {
     return this.httpClient.get<Review[]>(this.backEndURL + '/review?id=' + id);
   }
 
+  addReview(review: Review) {
+    return this.httpClient.post(this.backEndURL + '/book-trip', {observe: 'body', responseType: 'text' as 'json'});
+  }
+
 }
