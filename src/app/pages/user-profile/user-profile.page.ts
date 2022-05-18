@@ -118,7 +118,10 @@ export class UserProfilePage implements OnInit {
 
   async presentReviewModal() {
     const modal = await this.modalController.create({
-      component: ReviewFormComponent
+      component: ReviewFormComponent,
+      componentProps: { 
+        forUser: this.userID
+      }
     });
     return await modal.present();
   }

@@ -67,7 +67,7 @@ export class BackendService {
   }
 
   addReview(review: Review) {
-    return this.httpClient.post(this.backEndURL + '/book-trip', {observe: 'body', responseType: 'text' as 'json'});
+    return this.httpClient.post(this.backEndURL + '/review', review, {observe: 'body', responseType: 'text' as 'json'});
   }
 
 }
