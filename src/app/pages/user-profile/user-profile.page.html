@@ -65,7 +65,7 @@
         </ion-range>
       </ion-item>
 
-      <ion-button (click)="presentReviewModal()">Add review</ion-button>
+      <ion-button (click)="presentReviewModal()" [disabled]="hasReviewed">Add review</ion-button>
     
       <br>
       <h6>Reviews:</h6>

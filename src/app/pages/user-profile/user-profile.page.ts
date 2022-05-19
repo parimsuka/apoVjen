@@ -23,9 +23,11 @@ export class UserProfilePage implements OnInit {
   loggedInUserImgURL: string;
   reviews: Observable<any[]>;
   comments:  Observable<any[]>;
+  hasReviewed: boolean;
   newComment = '';
   averageReview: Review = {
     for: '',
+    from:'',
     polite: 0,
     drivingSafe: 0,
     vehicle: 0,
@@ -46,6 +48,7 @@ export class UserProfilePage implements OnInit {
     this.getProfilePicture();
     this.getUserNameFromId(this.userID);
     this.getReviewsByID();
+    this.getReviewFromUserForUser();
     this.getCommentsByID();
   }
 
@@ -74,10 +77,18 @@ export class UserProfilePage implements OnInit {
     this.findAverageOfReviews();
   }
 
+  getReviewFromUserForUser() {
+    this.chatService.getReviewFromUserForUser(this.loggedInUserID, this.userID).subscribe(review => {
+      this.hasReviewed = review.length > 0;
+      console.log(review);
+    });
+  }
+
   findAverageOfReviews() {
     this.reviews.subscribe(item => {
       this.averageReview = item.reduce((a, b) => {
         delete b['for'];
+        delete b['from'];
         for (let k in b) {
           if (b.hasOwnProperty(k))
             a[k] = (a[k] || 0) + b[k];
@@ -91,7 +102,7 @@ export class UserProfilePage implements OnInit {
         this.averageReview[key] = Math.round(this.averageReview[key] / size);
       }
 
-      console.log(this.averageReview);
+      //console.log('test', this.averageReview);
 
     });
   }
@@ -120,7 +131,8 @@ export class UserProfilePage implements OnInit {
     const modal = await this.modalController.create({
       component: ReviewFormComponent,
       componentProps: { 
-        forUser: this.userID
+        forUser: this.userID,
+        fromUser: this.loggedInUserID
       }
     });
     return await modal.present();

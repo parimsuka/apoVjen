@@ -20,6 +20,7 @@ export class ReviewFormComponent implements OnInit {
   reviewStateSubscription: Subscription;
   reviewForm: ReviewForm;
   forUser: string;
+  fromUser: string;
 
   ishidden = false;
 
@@ -60,6 +61,7 @@ export class ReviewFormComponent implements OnInit {
     //if (this.reviewForm.getForm().valid) {
       this.store.dispatch(review({review: new Review(
         this.forUser,
+        this.fromUser,
         this.reviewForm.getForm().get('polite').value,
         this.reviewForm.getForm().get('drivingSafe').value,
         this.reviewForm.getForm().get('vehicle').value,
