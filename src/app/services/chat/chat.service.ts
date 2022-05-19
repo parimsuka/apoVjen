@@ -98,6 +98,11 @@ export class ChatService {
     return this.afs.collection('reviews', ref => ref.where("for", "==", id)).valueChanges();
   }
 
+  getReviewFromUserForUser(fromUser: string, forUser: string) {
+    console.log(fromUser, forUser);
+    return this.afs.collection('reviews', ref => ref.where("for", "==", forUser).where("from", "==", fromUser)).valueChanges();
+  }
+
   //Comments
   getCommentsByID(id: string) {
     return this.afs.collection('comments', ref => ref.where("for", "==", id).orderBy('createdAt')).valueChanges();

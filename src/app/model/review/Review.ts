@@ -1,5 +1,6 @@
 export class Review {
     for: string;
+    from: string;
     polite: number;
     drivingSafe: number;
     vehicle: number;
@@ -8,6 +9,7 @@ export class Review {
 
 
     constructor(forUser: string,
+                fromUser: string,
                 polite: number,
                 drivingSafe: number,
                 vehicle: number,
@@ -15,6 +17,7 @@ export class Review {
                 helpful: number) {
 
         this.for = forUser;
+        this.from = fromUser;
         this.polite = polite;
         this.drivingSafe = drivingSafe;
         this.vehicle = vehicle;
