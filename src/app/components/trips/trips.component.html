@@ -1,3 +1,7 @@
 <div *ngFor="let trip of trips" #trips>
-  <app-trip [data]="trip" id="{{trip.id}}"></app-trip>
+  <app-trip [data]="trip" id="{{trip.id}}" *ngIf="!filterMytrips; else elseBlock"></app-trip>
+
+  <ng-template #elseBlock>
+    <app-trip [data]="trip" id="{{trip.id}}" *ngIf="trip.username == loggedInUserID"></app-trip>
+  </ng-template>
 </div>

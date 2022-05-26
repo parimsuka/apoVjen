@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { format, parseISO } from 'date-fns';
 import { Trip } from 'src/app/model/trip/Trip';
 import { BackendService } from 'src/app/services/backend/backend.service';
 
@@ -12,11 +13,14 @@ export class TripComponent implements OnInit {
   
   @Input() data: Trip;
   username: string;
+  formattedDate: string;
+  
 
   constructor(private router: Router, private backEndService: BackendService) { }
 
   ngOnInit() {
     this.getUserNameFromId();
+    this.formattedDate = format(parseISO(this.data.time), 'HH:mm, MMM d');
   }
 
   getUserNameFromId() {
@@ -27,5 +31,9 @@ export class TripComponent implements OnInit {
 
   goToTripDetails() {
     this.router.navigate(['/tabs/trip', {tripData: JSON.stringify(this.data)}]);
+  }
+
+  goToUserProfile() {
+    this.router.navigate(['/user-profile', {userID: JSON.stringify(this.data.username)}]);
   }
 }

@@ -15,8 +15,14 @@ export class CreateTripPageForm {
             from: ['', [Validators.required]],
             to: ['', [Validators.required]],
             time: ['', [Validators.required]],
+            duration: this.formBuilder.group({
+                hours: ['', [Validators.required, Validators.min(0), Validators.max(23)]],
+                minutes: ['', [Validators.required, Validators.min(0), Validators.max(59)]]
+            }),
             availablePlaces: ['', [Validators.required]],
-            username: ['']
+            username: [''],
+            fromObject: [''],
+            toObject: [''],
         });
 
         form.get('from').setValidators(fromAndToAreDifferent(form));
@@ -31,6 +37,22 @@ export class CreateTripPageForm {
 
     addUserName(name: string) : void {
         this.getForm().get('username').setValue(name);
+    }
+
+    setFrom(from: string) : void {
+        this.getForm().get('from').setValue(from);
+    }
+
+    setTo(from: string) : void {
+        this.getForm().get('to').setValue(from);
+    }
+
+    setFromObject(obj) : void {
+        this.getForm().get('fromObject').setValue(obj);
+    }
+
+    setToObject(obj) : void {
+        this.getForm().get('toObject').setValue(obj);
     }
 
 }

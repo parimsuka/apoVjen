@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { TripsComponent } from '../../components/trips/trips.component';
 
 @Component({
@@ -7,6 +7,8 @@ import { TripsComponent } from '../../components/trips/trips.component';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+
+  filterMytrips: boolean = false;
   
   @ViewChild('tripsContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
@@ -29,6 +31,13 @@ export class Tab1Page {
   generateTrips() {
     const factory = this.resolver.resolveComponentFactory(TripsComponent);
     this.container.clear();
-    this.container.createComponent(factory);
+    const component: ComponentRef<TripsComponent> = this.container.createComponent(factory);
+    component.instance.filterMytrips = this.filterMytrips;
+  }
+
+  triggerMyTrips() {
+    this.filterMytrips = !this.filterMytrips;
+
+    this.generateTrips();
   }
 }

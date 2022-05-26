@@ -10,6 +10,8 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 export class TripsComponent implements OnInit {
 
   trips: Trip[];
+  loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+  filterMytrips: boolean;
 
   constructor(private backEndService: BackendService) { }
 

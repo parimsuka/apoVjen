@@ -1,8 +1,8 @@
-<ion-card (click)="goToTripDetails()">
+<ion-card>
   <ion-card-header>
     <ion-item id="timeAndOwnerOfTrip">
-      <span>{{ 'trip.departure' | translate }}: {{data.time}} </span>
-      <ion-chip slot="end">
+      <span>{{ 'trip.departure' | translate }}: {{formattedDate}} </span>
+      <ion-chip slot="end" (click)="goToUserProfile()">
         <ion-avatar>
           <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
         </ion-avatar>
@@ -15,6 +15,6 @@
     <ion-item>
       <ion-icon name="car" slot="start" id="carIcon"></ion-icon>
       <ion-label >{{ 'trip.availablePlaces' | translate }}: <ion-badge>{{data.availablePlaces}}</ion-badge></ion-label>
-      <ion-button fill="outline" slot="end">{{ 'trip.book' | translate }}</ion-button>
+      <ion-button fill="outline" slot="end" (click)="goToTripDetails()">Details</ion-button>
     </ion-item>
 </ion-card>

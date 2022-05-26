@@ -14,27 +14,40 @@
       </ion-card-header>
     
       <ion-card-content>
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>{{ 'tab2.from' | translate }}</ion-label>
-          <ion-select class="custom-options" interface="popover" formControlName="from">
-            <div *ngFor="let city of cities">
-              <ion-select-option value="{{city}}" class="brown-option">{{city}}</ion-select-option>
-            </div>
-          </ion-select>
+          <ion-input type="text" value="" formControlName="from"></ion-input>
         </ion-item>
         <app-error-message message="From is mandatory" [field]="createTripForm.getForm().get('from')" error="required"></app-error-message>
         <app-error-message message="The departure city and destination must be different" [field]="createTripForm.getForm().get('from')" error="isntMatching"></app-error-message>
 
         <ion-item>
           <ion-label>{{ 'tab2.to' | translate }}</ion-label>
-          <ion-select class="custom-options" interface="popover" formControlName="to">
-            <div *ngFor="let city of cities">
-              <ion-select-option value="{{city}}" class="brown-option">{{city}}</ion-select-option>
-            </div>
-          </ion-select>
+          <ion-input type="text" value="" formControlName="to"></ion-input>
         </ion-item>
         <app-error-message message="To is mandatory" [field]="createTripForm.getForm().get('to')" error="required"></app-error-message>
-        <app-error-message message="The departure city and destination must be different" [field]="createTripForm.getForm().get('to')" error="isntMatching"></app-error-message>
+        <app-error-message message="The departure city and destination must be different" [field]="createTripForm.getForm().get('to')" error="isntMatching"></app-error-message> -->
+
+        
+        <ion-item>
+          <div>
+            <div (click)="showMap()">
+              <ion-label>{{ 'tab2.from' | translate }}</ion-label>
+              <ion-input type="text" value="" #autocompleteFrom formControlName="from"></ion-input>
+              <ion-label>{{ 'tab2.to' | translate }}</ion-label>
+              <ion-input type="text" value="" #autocompleteTo formControlName="to"></ion-input>
+            </div>
+          
+            <div [hidden]=showMapFlag>
+              <ion-item>
+                <capacitor-google-maps #map></capacitor-google-maps>
+              </ion-item>
+  
+              <ion-button color="primary" (click)="hideMap()">Close Map</ion-button>
+            </div>
+          </div>
+        </ion-item>
+
 
         <ion-item id="open-modal">
           <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
@@ -55,6 +68,22 @@
             </ion-content>
           </ng-template>
         </ion-modal>
+
+        <ion-item formGroupName="duration">
+          <ion-label position="floating">Approximate duration of the trip</ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-label position="floating">Hours</ion-label>
+                <ion-input type="number" value="" formControlName="hours"></ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-label position="floating">Minutes</ion-label>
+                <ion-input type="number" value="" formControlName="minutes"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
 
         <ion-item>
           <ion-label position="floating">{{ 'tab2.maxAvailablePlaces' | translate }}</ion-label>

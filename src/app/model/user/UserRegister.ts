@@ -5,6 +5,7 @@ export class UserRegister {
     email: string;
     password: string;
     phone: string;
+    uid: string;
 
     address: Address;
 }
