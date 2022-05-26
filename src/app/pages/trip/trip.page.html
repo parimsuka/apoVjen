@@ -4,40 +4,64 @@
       <ion-back-button defaultHref="tabs" text=""></ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'trip.title' | translate }}</ion-title>
-    <app-book-button slot="end" [trip]="trip" [booked]="showBookButton"></app-book-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-button fill="outline" color="danger" (click)="deleteTrip()" *ngIf="editable">{{ 'trip.delete' | translate }}</ion-button>
-  <ion-item id="timeAndOwnerOfTrip">
-    <ion-text>{{ 'trip.owner' | translate }}: </ion-text>
-    <ion-chip slot="" (click)="goToUserProfile()">
-      <!-- <ion-avatar>
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-avatar> -->
-      <ion-label>{{username}}</ion-label>
-    </ion-chip>
+  <ion-item>
+
+    <div *ngIf="editable; else elseBlock">
+      <ion-button fill="outline" slot="start" color="danger" (click)="deleteTrip()">{{ 'trip.delete' | translate }}</ion-button>
+      <ion-button slot="end">Complete</ion-button>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class='center-button'>
+        <app-book-button [trip]="trip" [booked]="showBookButton"></app-book-button>
+      </div>
+    </ng-template>
 
   </ion-item>
+  
+  <ion-item id="timeAndOwnerOfTrip">
+    <div class='center-button'>
+      <ion-text>{{ 'trip.owner' | translate }}: </ion-text>
+      <ion-chip slot="" (click)="goToUserProfile()">
+        <ion-label>{{username}}</ion-label>
+      </ion-chip>
+    </div>
+  </ion-item>
 
-    <h2><ion-icon name="disc-sharp"></ion-icon> <ion-text>{{formattedHour}}</ion-text> {{trip.from}} </h2>
+    <h2><ion-icon name="disc-sharp"></ion-icon> <ion-text class="timeText">{{formattedHour}}</ion-text> {{trip.from}} </h2>
     <h2><ion-icon name="ellipsis-vertical-sharp"></ion-icon></h2>
     <!-- <h2><ion-icon name="arrow-forward-outline"></ion-icon></h2> -->
-    <h2><ion-icon name="location-sharp"></ion-icon> <ion-text>{{formattedHourReach}}</ion-text> {{trip.to}} </h2>
+    <h2><ion-icon name="location-sharp"></ion-icon> <ion-text class="timeText">{{formattedHourReach}}</ion-text> {{trip.to}} </h2>
 
-    <br>
+    <ion-item>
+      <div class='center-button'>
+        <ion-label>Show/Hide map</ion-label>
+        <ion-toggle slot="end" (click)="triggerMap()"></ion-toggle>
+      </div>
+    </ion-item>
+
+    <div [hidden]=showMap>
+      <capacitor-google-maps #map></capacitor-google-maps>
+    </div>
       
     <ion-item>
-      <ion-icon name="time-sharp" slot="end"></ion-icon><ion-text>{{trip.duration.hours}}h {{trip.duration.minutes}}mins</ion-text>
+      <ion-icon name="time-sharp" slot="start"></ion-icon>
+      <ion-text>{{trip.duration.hours}}h {{trip.duration.minutes}}mins</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <div class='center-button'>
+        <ion-button size="medium" fill="outline" (click)="goToChatPage()">{{ 'trip.openChat' | translate }}</ion-button>
+      </div>
     </ion-item>
 
     <br>
-
-    <ion-button expand="block" fill="outline" (click)="goToChatPage()">{{ 'trip.openChat' | translate }}</ion-button>
-    <br>
-    <h6>{{ 'trip.availablePlaces' | translate }}: <ion-badge color="danger"> {{trip.availablePlaces}} </ion-badge></h6>
+    <h6 style="text-align:center">{{ 'trip.availablePlaces' | translate }}: <ion-badge color="danger"> {{trip.availablePlaces}} </ion-badge></h6>
 
     <br>
     <h6>{{ 'trip.bookedBy' | translate }}:</h6>

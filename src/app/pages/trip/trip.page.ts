@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GoogleMap } from '@capacitor/google-maps';
 import { ToastController } from '@ionic/angular';
 import { addHours, addMinutes, format, parseISO } from 'date-fns';
 import { Trip } from 'src/app/model/trip/Trip';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import { BackendService } from 'src/app/services/backend/backend.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-trip',
@@ -20,6 +22,11 @@ export class TripPage implements OnInit {
   bookedUsers: UserRegister[] = [];
   formattedHour: string;
   formattedHourReach: string;
+  showMap: boolean = true;
+
+  newMap: GoogleMap;
+
+  @ViewChild('map') mapRef: ElementRef<HTMLElement>;
 
   constructor(private route: ActivatedRoute, private backEndService: BackendService, private router: Router,
             private toastController: ToastController) {
@@ -48,6 +55,7 @@ export class TripPage implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.createMap();
   }
 
   initializeBookedUsers(bookedBy: string[]) {
@@ -65,7 +73,7 @@ export class TripPage implements OnInit {
 
   goToChatPage() {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
-    if (this.trip.bookedBy !== undefined && this.trip.bookedBy.includes(loggedInUserID)) {
+    if ((this.trip.bookedBy !== undefined && this.trip.bookedBy.includes(loggedInUserID)) || this.trip.username === loggedInUserID) {
       this.router.navigate(['/chat', {tripID: this.trip.id}]);
     } else {
       this.toastController.create({
@@ -105,6 +113,49 @@ export class TripPage implements OnInit {
 
   goToUserProfile() {
     this.router.navigate(['/user-profile', {userID: JSON.stringify(this.trip.username)}]);
+  }
+
+  triggerMap() {
+    this.showMap = !this.showMap;
+  }
+
+  async createMap() {
+    try {
+      this.newMap = await GoogleMap.create({
+        id: 'my-map',
+        element: this.mapRef.nativeElement,
+        apiKey: environment.firebaseConfig.apiKey,
+        config: {
+          center: {
+            lat: this.trip.fromObject.geometry.location.lat,
+            lng: this.trip.fromObject.geometry.location.lng
+          },
+          zoom: 8,
+        },
+      });
+
+      this.addMarker(
+        this.trip.fromObject.geometry.location.lat,
+        this.trip.fromObject.geometry.location.lng
+      );
+
+      this.addMarker(
+        this.trip.toObject.geometry.location.lat,
+        this.trip.toObject.geometry.location.lng
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async addMarker(lat, lng) {
+    await this.newMap.addMarker({
+      coordinate: {
+        lat: lat,
+        lng: lng
+      },
+      draggable: false
+    });
   }
 
   private getUser(id: string) {

@@ -9,5 +9,7 @@ export class Trip {
         minutes: number
     };
     availablePlaces: number;
-    bookedBy: string[]
+    fromObject: any;
+    toObject: any;
+    bookedBy: string[];
 }
