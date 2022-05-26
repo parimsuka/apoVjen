@@ -3,7 +3,8 @@
     <ion-title>
       {{ 'tab1.title' | translate }}
     </ion-title>
-    <ion-button slot="end">{{ 'tab1.myTrips' | translate }}</ion-button>
+    <!-- <ion-button slot="end" (click)="triggerMyTrips()">{{ 'tab1.myTrips' | translate }}</ion-button> -->
+    <ion-toggle mode="md" slot="end" class="icon-toggle" (click)="triggerMyTrips()"></ion-toggle>
   </ion-toolbar>
 </ion-header>
 

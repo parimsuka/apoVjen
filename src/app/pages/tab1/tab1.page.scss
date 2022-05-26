@@ -1,0 +1,20 @@
+.icon-toggle {
+    --handle-background-checked: #fff
+      url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Power_icon_%28the_Noun_Project_35084%29.svg/480px-Power_icon_%28the_Noun_Project_35084%29.svg.png) no-repeat center /
+      contain;
+      width: 100px;
+      height: 50px;
+
+      --handle-width: 0px;
+      --handle-height: 0px;
+}
+
+.icon-toggle::before {
+    position: absolute;
+    content: "MY TRIPS";
+    color: white;
+    top: 27px;
+    left: 23px;
+    z-index: 1;
+    font-size: 16px;
+}

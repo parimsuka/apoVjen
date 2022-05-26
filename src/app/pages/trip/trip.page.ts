@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { addHours, addMinutes, format, parseISO } from 'date-fns';
 import { Trip } from 'src/app/model/trip/Trip';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import { BackendService } from 'src/app/services/backend/backend.service';
@@ -17,6 +18,8 @@ export class TripPage implements OnInit {
   trip: Trip;
   username: string;
   bookedUsers: UserRegister[] = [];
+  formattedHour: string;
+  formattedHourReach: string;
 
   constructor(private route: ActivatedRoute, private backEndService: BackendService, private router: Router,
             private toastController: ToastController) {
@@ -30,6 +33,10 @@ export class TripPage implements OnInit {
     this.getUserNameFromId();
     this.isTripEditable();
     this.shouldShowBookButton();
+
+    this.formattedHour = format(parseISO(this.trip.time), 'HH:mm');
+    const date = new Date(this.trip.time);
+    this.formattedHourReach = format(addMinutes(addHours(date, this.trip.duration.hours), this.trip.duration.minutes), 'HH:mm');
   }
 
   ionViewDidEnter() {
@@ -73,8 +80,10 @@ export class TripPage implements OnInit {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
 
     this.getUserByID(loggedInUserID).then(user => {
-      if (this.trip.username === user.name) {
+      if (this.trip.username === user.uid) {
         this.editable = true;
+      } else {
+        this.editable = false;
       }
     })
   }

@@ -25,6 +25,7 @@ export class UserProfilePage implements OnInit {
   comments:  Observable<any[]>;
   hasReviewed: boolean;
   newComment = '';
+  nrOfTrips: string;
   averageReview: Review = {
     for: '',
     from:'',
@@ -50,6 +51,7 @@ export class UserProfilePage implements OnInit {
     this.getReviewsByID();
     this.getReviewFromUserForUser();
     this.getCommentsByID();
+    this.getNrOfTrips();
   }
 
   getUserNameFromId(ID: string) {
@@ -81,6 +83,13 @@ export class UserProfilePage implements OnInit {
     this.chatService.getReviewFromUserForUser(this.loggedInUserID, this.userID).subscribe(review => {
       this.hasReviewed = review.length > 0;
       console.log(review);
+    });
+  }
+
+  getNrOfTrips() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.backEndService.getTripsNumberWithIdOwner(loggedInUserID).subscribe(result => {
+      this.nrOfTrips = result.toString();
     });
   }
 

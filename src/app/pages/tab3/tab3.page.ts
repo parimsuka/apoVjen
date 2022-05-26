@@ -20,6 +20,7 @@ export class Tab3Page {
   img: string;
   changeProfilePicStateSubscription: Subscription;
   userName: string;
+  nrOfTrips: string;
 
   constructor(private router: Router, private store: Store<AppState>, private backEndService: BackendService,
               public modalController: ModalController) {
@@ -33,6 +34,7 @@ export class Tab3Page {
   ngOnInit() {
     this.getProfilePicture();
     this.getLoggedInUserName();
+    this.getNrOfTrips();
 
     this.changeProfilePicStateSubscription = this.store.select('changeProfilePic').subscribe(changeProfilePicState => {
       this.onProfilePicChanged(changeProfilePicState);
@@ -71,6 +73,13 @@ export class Tab3Page {
     const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
     this.backEndService.getProfilePictureURL(loggedInUserID).then(imgURL => {
       this.img = imgURL;
+    });
+  }
+
+  getNrOfTrips() {
+    const loggedInUserID = JSON.parse(localStorage.getItem('loggedInUser')).user.id;
+    this.backEndService.getTripsNumberWithIdOwner(loggedInUserID).subscribe(result => {
+      this.nrOfTrips = result.toString();
     });
   }
 
