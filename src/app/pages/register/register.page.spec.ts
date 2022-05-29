@@ -1,9 +1,12 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Store, StoreModule } from '@ngrx/store';
+import { TranslateLoader, TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { createTranslateLoader } from 'src/app/app.module';
 import { UserRegister } from 'src/app/model/user/UserRegister';
 import { AppState } from 'src/store/AppState';
 import { loadingReducer } from 'src/store/loading/loading.reducers';
@@ -33,8 +36,20 @@ describe('RegisterPage', () => {
               StoreModule.forRoot([]),
               StoreModule.forFeature("loading", loadingReducer),
               StoreModule.forFeature("register", registerReducer),
-              StoreModule.forFeature("login", loginReducer)
-            ]
+              StoreModule.forFeature("login", loginReducer),
+              TranslateModule.forChild({
+                loader: {
+                  provide: TranslateLoader,
+                  useFactory: createTranslateLoader,
+                  deps: [HttpClient]
+                }
+              })
+            ],
+        providers: [
+          TranslateStore,
+          HttpClient,
+          HttpHandler
+        ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RegisterPage);

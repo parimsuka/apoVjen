@@ -28,7 +28,7 @@ jobs:
       - run: npm install
       - run:
           name: Run tests
-          command: npm run test_jenkins
+          command: npm run test_CI
 
       - save_cache:
           paths:
