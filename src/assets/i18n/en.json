@@ -17,7 +17,11 @@
         "pickDate": "Pick a date",
         "dismiss": "Dismiss",
         "select": "Select",
-        "maxAvailablePlaces": "Max Available Places"
+        "maxAvailablePlaces": "Max Available Places",
+        "closeMap": "Close Map",
+        "approxDuration": "Approximate duration of the trip",
+        "hours": "Hours",
+        "minutes": "Minutes"
     },
     "tab3": {
         "backButton": "Home",
@@ -39,7 +43,9 @@
         "owner": "Owner of the trip",
         "openChat": "Open trip chat",
         "bookedBy": "Booked by",
-        "chatTitle": "Trip Chat"
+        "chatTitle": "Trip Chat",
+        "complete": "Complete",
+        "showHideMap": "Show/Hide map"
     },
     "changePassword": {
         "title": "Change Password",
@@ -74,5 +80,17 @@
         "language": "Language",
         "languageChangePlaceholder": "English",
         "invite": "Now you have selected {{lang}}"
+    },
+    "userProfile": {
+        "reviews": "Reviews",
+        "polite": "Polite",
+        "drivingSafe": "Driving safe",
+        "vehicle": "Vehicle",
+        "service": "Service",
+        "helpful": "Helpful",
+        "addReview": "Add review",
+        "commentedOn": "Commented on",
+        "writeComment": "Write a comment",
+        "postComment": "Post Comment"
     }
 }

@@ -26,6 +26,10 @@ export class BackendService {
     return this.httpClient.delete<Trip>(this.backEndURL + '/create-trip/' + id, {observe: 'body', responseType: 'text' as 'json'});
   }
 
+  completeTrip(id: string) {
+    return this.httpClient.post(this.backEndURL + '/complete-trip/' + id, {observe: 'body', responseType: 'text' as 'json'});
+  }
+
   getTripsNumberWithIdOwner(id: string) {
     return this.httpClient.get(this.backEndURL + '/create-trip/' + id, {observe: 'body', responseType: 'text' as 'json'});
   }

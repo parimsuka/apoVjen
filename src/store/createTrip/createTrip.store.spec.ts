@@ -22,7 +22,8 @@ describe("Create trip store", () => {
                 availablePlaces: 42,
                 bookedBy: [],
                 fromObject: new Object(),
-                toObject: new Object()}
+                toObject: new Object(),
+                completed: false}
             }));
 
         expect(newState).toEqual({

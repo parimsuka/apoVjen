@@ -43,7 +43,7 @@
                 <capacitor-google-maps #map></capacitor-google-maps>
               </ion-item>
   
-              <ion-button color="primary" (click)="hideMap()">Close Map</ion-button>
+              <ion-button color="primary" (click)="hideMap()">{{ 'tab2.closeMap' | translate }}</ion-button>
             </div>
           </div>
         </ion-item>
@@ -59,7 +59,7 @@
         <ion-modal trigger="open-modal">
           <ng-template>
             <ion-content>
-              <ion-datetime formControlName="time" #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
+              <ion-datetime [min]="date" formControlName="time" #datetime size="cover" [value]="dateValue" (ionChange)="dateChanged(datetime.value)"(ionCancel)="showPicker = false">
                 <ion-buttons slot="buttons">
                   <ion-button (click)="close()">{{ 'tab2.dismiss' | translate }}</ion-button>
                   <ion-button (click)="select()" color="primary">{{ 'tab2.select' | translate }}</ion-button>
@@ -70,15 +70,15 @@
         </ion-modal>
 
         <ion-item formGroupName="duration">
-          <ion-label position="floating">Approximate duration of the trip</ion-label>
+          <ion-label position="floating">{{ 'tab2.approxDuration' | translate }}</ion-label>
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-label position="floating">Hours</ion-label>
+                <ion-label position="floating">{{ 'tab2.hours' | translate }}</ion-label>
                 <ion-input type="number" value="" formControlName="hours"></ion-input>
               </ion-col>
               <ion-col>
-                <ion-label position="floating">Minutes</ion-label>
+                <ion-label position="floating">{{ 'tab2.minutes' | translate }}</ion-label>
                 <ion-input type="number" value="" formControlName="minutes"></ion-input>
               </ion-col>
             </ion-row>

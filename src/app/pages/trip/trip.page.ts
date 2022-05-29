@@ -158,6 +158,11 @@ export class TripPage implements OnInit {
     });
   }
 
+  completeTrip() {
+    this.backEndService.completeTrip(this.trip.id).subscribe();
+    this.router.navigate(['tabs/tab1']);
+  }
+
   private getUser(id: string) {
     this.backEndService.getUser(id).subscribe(user => {
       this.bookedUsers.push(user);
