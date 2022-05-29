@@ -15,8 +15,14 @@ describe("Create trip store", () => {
                 username: 'anyName',
                 from: 'anyCity',
                 to: 'anotherCity',
+                duration: {
+                    hours: 1,
+                    minutes: 1
+                },
                 availablePlaces: 42,
-                bookedBy: []}
+                bookedBy: [],
+                fromObject: new Object(),
+                toObject: new Object()}
             }));
 
         expect(newState).toEqual({

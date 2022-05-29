@@ -116,7 +116,7 @@ export class Tab2Page {
 
     if (this.createTripForm.getForm().valid) {
       console.log(this.createTripForm.getForm().value);
-      this.store.dispatch(createTrip({trip: this.createTripForm.getForm().value}));
+      //this.store.dispatch(createTrip({trip: this.createTripForm.getForm().value}));
     }
   }
 
