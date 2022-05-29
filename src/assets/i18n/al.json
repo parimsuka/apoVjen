@@ -17,7 +17,11 @@
         "pickDate": "Zgjedh daten",
         "dismiss": "Injoro",
         "select": "Zgjedh",
-        "maxAvailablePlaces": "Vende te lira"
+        "maxAvailablePlaces": "Vende te lira",
+        "closeMap": "Mbyll harten",
+        "approxDuration": "Koha e udhetimit",
+        "hours": "Oret",
+        "minutes": "Minutat"
     },
     "tab3": {
         "backButton": "Home",
@@ -39,7 +43,9 @@
         "owner": "Krijuesi i udhetimit",
         "openChat": "Hap chatin e udhetimit",
         "bookedBy": "E rezervuar nga",
-        "chatTitle": "Chati i udhetimit"
+        "chatTitle": "Chati i udhetimit",
+        "complete": "Kompleto",
+        "showHideMap": "Hap/Mbyll harten"
     },
     "changePassword": {
         "title": "Nderro Fjalekalimin",
@@ -74,5 +80,17 @@
         "language": "Gjuha",
         "languageChangePlaceholder": "Albanian",
         "invite": "Tani keni zgjedhur gjuhen {{lang}}"
+    },
+    "userProfile": {
+        "reviews": "Shikimet",
+        "polite": "I/e sjellshem",
+        "drivingSafe": "Vozitje e sigurt",
+        "vehicle": "Makina",
+        "service": "Sherbimi",
+        "helpful": "I/e dobishem",
+        "addReview": "Shto rishikimin",
+        "commentedOn": "Ka komentuar me",
+        "writeComment": "Shkruaj koment",
+        "postComment": "Shto komentin"
     }
 }

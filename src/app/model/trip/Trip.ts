@@ -12,4 +12,5 @@ export class Trip {
     fromObject: any;
     toObject: any;
     bookedBy: string[];
+    completed: boolean;
 }

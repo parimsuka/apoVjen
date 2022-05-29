@@ -13,10 +13,10 @@
 
     <div *ngIf="editable; else elseBlock">
       <ion-button fill="outline" slot="start" color="danger" (click)="deleteTrip()">{{ 'trip.delete' | translate }}</ion-button>
-      <ion-button slot="end">Complete</ion-button>
+      <ion-button slot="end" (click)="completeTrip()">{{ 'trip.complete' | translate }}</ion-button>
     </div>
 
-    <ng-template #elseBlock>
+    <ng-template #elseBlock *ngif="!trip.completed">
       <div class='center-button'>
         <app-book-button [trip]="trip" [booked]="showBookButton"></app-book-button>
       </div>
@@ -40,7 +40,7 @@
 
     <ion-item>
       <div class='center-button'>
-        <ion-label>Show/Hide map</ion-label>
+        <ion-label>{{ 'trip.showHideMap' | translate }}</ion-label>
         <ion-toggle slot="end" (click)="triggerMap()"></ion-toggle>
       </div>
     </ion-item>

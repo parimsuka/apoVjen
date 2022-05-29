@@ -23,6 +23,7 @@ export class CreateTripPageForm {
             username: [''],
             fromObject: [''],
             toObject: [''],
+            completed: [false]
         });
 
         form.get('from').setValidators(fromAndToAreDifferent(form));

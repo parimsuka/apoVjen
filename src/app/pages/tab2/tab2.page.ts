@@ -23,6 +23,8 @@ declare var google;
 })
 export class Tab2Page {
 
+  date: String = new Date().toISOString();
+
   newMap: GoogleMap;
   markerIDFrom: string;
   markerIDTo: string;
@@ -115,8 +117,7 @@ export class Tab2Page {
     this.createTripForm.getForm().markAllAsTouched();
 
     if (this.createTripForm.getForm().valid) {
-      console.log(this.createTripForm.getForm().value);
-      //this.store.dispatch(createTrip({trip: this.createTripForm.getForm().value}));
+      this.store.dispatch(createTrip({trip: this.createTripForm.getForm().value}));
     }
   }
 
